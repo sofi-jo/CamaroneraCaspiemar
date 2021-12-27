@@ -20,6 +20,11 @@ nav img{
     margin: 5px;
 }
 
+table.tabla {
+    width: 100%;
+    border: 1px solid rgb(4, 0, 255);
+ }
+
 nav h3{
     float:right;
     color: #fff;
