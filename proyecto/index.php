@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/style.css" />
-    <title></title>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <img src="images/logo.png" alt="logo" />
-        <h3 >Iniciar Sesión</h3>
-      </nav>
-    </header>º
+<?php
+    include("includes/cabecera.php");
+    include("dll/class_mysqli.php");
+?>
     <main>
       <h1>Camaronera CASPIEMAR</h1>
       <div class="slider">
@@ -57,21 +46,7 @@
         </div>
       </section>
     </main>
-    <footer>
-        <div class="footer-contact">
-            <img src="images/logo.png" alt="logo" />
-            <div class="contact">
-              <h3>Contactos</h3>
-              <h4><b>Teléfono:</b> 2585858</h4>
-              <h4><b>Celular:</b> 099999999</h4>
-            </div>
-            <div class="icons">
-              <img src="images/facebookIcon.png" alt="facebookIcon" />
-              <img src="images/instagramIcon.png" alt="InstagramIcon" />
-              <img src="images/Frame 1.png" alt="WhatsappIcon" />
-              <h4>© 2020–2021 Camaronera Castillo Piedra Caspiemar Cia.Ltda</h4>
-            </div>
-        </div>
-    </footer>
-  </body>
-</html>
+
+<?php
+    include("includes/piePagina.php");
+?>

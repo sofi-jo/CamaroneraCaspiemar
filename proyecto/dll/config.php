@@ -1,6 +1,6 @@
 <?php
-$nombreSitio="PODOCARPUS";
-$urlSitio="http://127.0.0.1/Clases/ingenieriaWeb/Prueba/";
+$nombreSitio="Caspiemar";
+$urlSitio="http://127.0.0.1/Clases/ingenieriaWeb/proyecto/";
 
 //Datos de la base de datos
 	define('DBHOST','127.0.0.1');
