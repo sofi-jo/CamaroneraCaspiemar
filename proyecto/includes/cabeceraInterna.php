@@ -1,5 +1,5 @@
 <?php
-    include("dll/config.php");
+    include("../dll/config.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +13,12 @@
   <body>
     <header>
       <nav>
-        <img src="<?php echo $urlSitio; ?>images/logo.png" alt="logo" />
+        <img src="<?php echo $urlSitio; ?>images/logo.png" alt="logo"/>
         <a href="<?php echo $urlSitio; ?>includes/cosechas.php"><h3 >Iniciar Sesión</h3></a>
       </nav>
     </header>
+    <menu>
+        <a href="<?php echo $urlSitio; ?>includes/cosechas.php">Gestionar Cosechas</a>
+        <a href="<?php echo $urlSitio; ?>includes/cosechas.php">Generar Reportes</a>
+        <a href="<?php echo $urlSitio; ?>includes/crudDB.php">Gestionar Base de datos</a>
+    </menu>

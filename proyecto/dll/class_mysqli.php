@@ -111,6 +111,27 @@ class clase_mysqli7{
 		}
 		echo json_encode($resultData);
 	}
+	function verconsulta3(){
+		echo "<table border=1>";
+		echo "<tr>";
+		for($i=0;$i<$this->numcampos(); $i++){
+			echo "<td>".mysqli_fetch_field_direct($this->Consulta_ID, $i)->name."</td>";
+		}
+		echo "<td>Actualizar</td>";
+		echo "<td>Borrar</td>";
+		echo "</tr>";
+		while ($row=mysqli_fetch_array($this->Consulta_ID)) {
+			echo "<tr>";
+			for ($i=0; $i < $this->numcampos(); $i++) { 
+				echo "<td>".$row[$i]."</td>";
+			}
+				echo "<td><a href='actualizarRegistroU.php?idRegistro=$row[0]'>Actualizar</a></td>";
+				echo "<td><a href='borrarCostoIndirecto.php?idRegistro=$row[0]'>Borrar</a></td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+
+	}
 
 }
 
