@@ -76,11 +76,13 @@ class clase_mysqli7
 	function verconsulta()
 	{
 		echo "<table border=1 class = 'tabla'>";
+		echo '<thead>';
 		echo "<tr>";
 		for ($i = 0; $i < $this->numcampos(); $i++) {
 			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
 		}
 		echo "</tr>";
+		echo '</thead>';
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
 			for ($i = 0; $i < $this->numcampos(); $i++) {
@@ -90,6 +92,28 @@ class clase_mysqli7
 		}
 		echo "</table>";
 	}
+
+	function verconsultaenlace()
+	{
+		echo "<table border=1>";
+		echo "<tr>";
+		for ($i = 0; $i < $this->numcampos(); $i++) {
+			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
+		}
+		echo "<td></td>";
+		echo "</tr>";
+		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
+			echo "<tr>";
+			for ($i = 0; $i < $this->numcampos(); $i++) {
+				echo "<td>" . $row[$i] . "</td>";
+			}
+			echo "<td><a href='crudCosechas.php?idRegistro=$row[0]'>Visualizar</a></td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+	}
+
+	
 
 	//Retorna una lista de la consulta - 1 fila
 	function consultaLista()
@@ -173,7 +197,50 @@ class clase_mysqli7
 		echo "</table>";
 	}
 
+	function verconsulta3()
+	{
+		echo "<table class = 'tabla'>";
+		echo "<thead>";
+		echo "<tr>";
+		for ($i = 0; $i < $this->numcampos(); $i++) {
+			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
+		}
+		echo "<td>Editar</td>";
+		echo "</thead>";
+		
+		echo "</tr>";
+		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
+			echo "<tr>";
+			for ($i = 0; $i < $this->numcampos(); $i++) {
+				echo "<td>" . $row[$i] . "</td>";
+			}
+			$link = $_SERVER['REQUEST_URI'];
+			echo <<< EOT
+			<td>
+			<form action="editarDatos.php">
+			<select name="tipoEdit" onchange="location = this.value;">
+			<option>...</option>
+			<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Actualizar&idRegistro=$row[0]">Actualizar</option>
+			<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Eliminar&idRegistro=$row[0]">Eliminar</option>
+			</select>
+			</form>
+			</td>
+			</tr>
+			EOT;
+		}
+		echo "</table>";
+	}
 
+/* 	<td>
+	<form action="editarDatos.php">
+	<select name="tipoEdit" onchange="this.form.submit()">
+	<option>...</option>
+	<option value = "Actualizar\&idRegsitro=$row[0]">Actualizar</option>
+	<option>Eliminar</option>
+	</select>
+	</form>
+	</td>
+	</tr> */
 	//Retorna una lista de la consulta JSON
 	function consultaJson()
 	{

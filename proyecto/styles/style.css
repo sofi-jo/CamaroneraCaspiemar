@@ -5,6 +5,65 @@
     text-decoration: none;
 }
 
+/* nav */
+
+.menu{
+    width: 100%;
+    background-color: #89C2D9;
+    text-align: center;
+}
+
+.menu ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li{
+    display: inline-block;
+}
+
+.menu ul li a{
+    color: #000;
+    display: block;
+    padding: 20px 60px;
+    text-decoration: none;
+}
+
+.menu ul li a:hover{
+    background-color: #fff;
+}
+
+.opciones{
+    text-align: center;
+    display: inline-block;
+    width: 95%;
+    height: 50px;
+    padding: 25px;
+}
+
+.graficos{
+    display: flex;
+    justify-content: center;
+}
+
+.graficos h3{
+    text-align: center;
+    display: inline-block;
+    width: 25%;
+    height: 50px;
+    padding: 10px;
+}
+
+.opciones a{
+    margin: 50px;
+    background-color: rgb(29, 29, 99);
+    padding: 50px;
+    color: white;
+}
+
+
+
 header {
     background-color: #2A6F97;
     height: 150px;
@@ -22,8 +81,27 @@ nav img{
 }
 
 table.tabla {
-    width: 100%;
-    border: 1px solid rgb(4, 0, 255);
+    width: 80%;
+    border: 1px solid rgb(39, 38, 51);
+    
+ }
+
+ table{
+    background-color: rgba(255, 255, 255, 255);
+ }
+
+ table thead{
+     background-color: rgb(120, 181, 238);
+ }
+
+
+ th, td {
+    width: 25%;
+    text-align: center;
+    vertical-align: top;
+    border-collapse: collapse;
+    padding: 0.3em;
+    caption-side: bottom;
  }
 
 nav h3{
@@ -78,6 +156,10 @@ section{
 footer{
     background-color: #2A6F97;
     height: 150px;
+    bottom: 0;
+    width: 100%;
+    position: relative;
+    margin-top: 160px;
 }
 
 .footer-contact{
