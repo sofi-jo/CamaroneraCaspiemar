@@ -1,6 +1,7 @@
 <?php
     include("../dll/config.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -17,8 +18,10 @@
         <a href="<?php echo $urlSitio; ?>includes/cosechas.php"><h3 >Iniciar Sesión</h3></a>
       </nav>
     </header>
-    <menu>
-        <a href="<?php echo $urlSitio; ?>includes/cosechas.php">Gestionar Cosechas</a>
-        <a href="<?php echo $urlSitio; ?>includes/cosechas.php">Generar Reportes</a>
-        <a href="<?php echo $urlSitio; ?>includes/crudDB.php">Gestionar Base de datos</a>
-    </menu>
+    <nav class = "menu">
+      <ul>
+        <li><a href="<?php echo $urlSitio; ?>includes/cosechas.php">Gestionar Cosechas</a></li>
+        <li><a href="<?php echo $urlSitio; ?>includes/cosechas.php">Generar Reportes</a></li>
+        <li><a href="<?php echo $urlSitio; ?>includes/crudDB.php">Gestionar Base de datos</a></li>
+      </ul>
+    </nav>

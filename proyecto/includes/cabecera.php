@@ -1,6 +1,7 @@
-<?php
+<!-- <?php
     include("dll/config.php");
-?>
+?> 
+-->
 <!DOCTYPE html>
 <html lang="es">
   <head>
