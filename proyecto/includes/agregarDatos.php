@@ -8,16 +8,18 @@ $miconexion= new clase_mysqli7;
 $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
 
-if($urlFrom == '/camaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'){
+if($urlFrom == '/Clases/ingenieriaWeb/proyecto/includes/gestionarBDmateriaPrima.php'){
     echo <<< EOT
-    <main class="content">
+    <main>
 
-    <h1>Agregar Materia Prima a la Base de Datos</h2>
+    <h2 class="titulo">Agregar Materia Prima a la Base de Datos</h2>
 
     <form class ="formulario" method="post">
         <input type="text" name="nombre" placeholder="Ingrese nombre de producto"><br>
         <input type="text" name="descripcionNuevo" placeholder="Ingresar descripcion"><br>
         <input type="submit" value="Agregar">
+        <input type="cancel" onclick="javascript:window.location='$urlSitio/includes/gestionarBDmateriaPrima.php';"
+        value="Cancelar">
     </form>
 
     </main>
@@ -72,4 +74,6 @@ function agregarDatos2(){
     
     $miconexion->consulta($sql);
 }
+
+include("piePagina.php");
 ?>

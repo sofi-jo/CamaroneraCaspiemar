@@ -1,7 +1,7 @@
 <?php
 
 $nombreSitio="Caspiemar";
-$urlSitio="http://127.0.0.1/camaroneraCaspiemar/proyecto/";
+$urlSitio="http://127.0.0.1/Clases/ingenieriaWeb/proyecto/";
 
 //Datos de la base de datos
 define('DBHOST','127.0.0.1');

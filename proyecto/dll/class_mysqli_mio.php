@@ -95,7 +95,7 @@ class clase_mysqli7
 
 	function verconsultaenlace()
 	{
-		echo "<table border=1>";
+		echo "<table class ='tabla'>";
 		echo "<tr>";
 		for ($i = 0; $i < $this->numcampos(); $i++) {
 			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
@@ -242,26 +242,5 @@ class clase_mysqli7
 	</td>
 	</tr> */
 	//Retorna una lista de la consulta JSON
-	function consultaJson()
-	{
-		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-			$data[] = $row;	
-		}
-		//antes esta linea esta dentro del while y no validaba bien el json /// arreglar no hay sentido en la asignacion del data[] row
-		echo json_encode(array("inscritos" => $data));
-	}
 
-	//Consultya Json // cosas raras el if siempre corre? el while reasigna el mismo valor multiples veces
-	function consulta_busqueda_json()
-	{
-		if ($this->numcampos() > 0) {
-			while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-				$data[] = $row;
-			}
-			$resultData = array('status' => true, 'postData' => $data);
-		} else {
-			$resultData = array('status' => false, 'message' => 'No hay datos');
-		}
-		echo json_encode($resultData);
-	}
 }

@@ -3,8 +3,9 @@
     include("../dll/class_mysqli_mio.php");
 
     echo '<main class="content">';
-    echo "<h2>Cosechas</h2>";
-
+    echo '<h2 class ="titulo">Cosechas</h2>';
+    $link = $_SERVER['REQUEST_URI'];
+    echo '<div class="agregar"><a href=agregarDatos.php?urlFrom=' . $link . '>Agregar +</a></div>';
     $miconexion= new clase_mysqli7;
     $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME); 
     $sql="SELECT * FROM `cosecha`"; 
@@ -13,10 +14,8 @@
     $miconexion->consulta($sql);
     $miconexion->verconsultaenlace(); 
     
-/*     $link = $_SERVER['REQUEST_URI'];
-    echo '<div>';
-    echo '<a href=agregarDatos.php?urlFrom=' . $link . '>Agregar</a>';
-    echo '</div>'; */
+
+
     echo '</main>';
     include("piePagina.php");
 ?>

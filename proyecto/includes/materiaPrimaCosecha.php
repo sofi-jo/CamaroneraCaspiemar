@@ -1,9 +1,11 @@
 <?php
     include("cabeceraInterna.php");
     include("../dll/class_mysqli_mio.php");
+    $link = $_SERVER['REQUEST_URI'];
 
     echo '<main class="content">';
-    echo "<h2>Materia Prima</h2>";
+    echo "<h2 class='titulo'>Materia Prima</h2>";
+    echo '<div class="agregar"><a href=agregarDatos.php?urlFrom=' . $link . '>Agregar +</a></div>';
 
     $miconexion= new clase_mysqli7;
     $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME); 
@@ -13,10 +15,7 @@
     $miconexion->consulta($sql);
     $miconexion->verconsulta3(); 
 
-    $link = $_SERVER['REQUEST_URI'];
-    echo '<div>';
-    echo '<a href=agregarDatos.php?urlFrom=' . $link . '>Agregar</a>';
-    echo '</div>'; 
+
     echo '</main>';
     include("piePagina.php");
 
