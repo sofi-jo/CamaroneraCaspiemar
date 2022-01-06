@@ -9,7 +9,7 @@
 
     $miconexion= new clase_mysqli7;
     $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME); 
-    $sql="SELECT nombre, descripcion FROM materiaprima"; 
+    $sql="SELECT nombre'Nombre', descripcion 'Descripción' FROM materiaprima"; 
     // es necesario que haya una consulta antes de llamar a una funcion, en el caso de llamar a dos funciones solo reconocera la primera
    
     $miconexion->consulta($sql);

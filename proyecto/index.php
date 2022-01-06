@@ -3,11 +3,11 @@
     include("dll/class_mysqli.php");
 ?>
     <main>
-      <h1>Camaronera CASPIEMAR</h1>
+      <h1 class="titulo">Camaronera CASPIEMAR</h1>
       <div class="slider">
         <img src="images/imgen2.jpg" alt="imagenPersonal" />
       </div>
-      <section>
+      <div class = "info">
         <div class="parrafo">
           <h2>¿QUIÉNES SOMOS?</h2>
           <p>
@@ -44,7 +44,7 @@
             cumque. Ducimus, asperiores ullam?
           </p>
         </div>
-      </section>
+      </div>
     </main>
 
 <?php
