@@ -30,7 +30,7 @@ if($urlFrom == '/Clases/ingenieriaWeb/proyecto/includes/gestionarBDmateriaPrima.
         #echo '<script>alert("Datos guardados...");</script>';
         echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
     }
-}elseif ($urlFrom == '/camaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php') {
+}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php') {
     echo <<< EOT
     <main class="content">
 
@@ -51,7 +51,29 @@ if($urlFrom == '/Clases/ingenieriaWeb/proyecto/includes/gestionarBDmateriaPrima.
         echo '<script>alert("Datos guardados...");</script>';
         echo "<script>location.href='materiaPrimaCosecha.php'</script>";
     }
+}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/cosechas.php') {
+    echo <<< EOT
+    <main class="content">
+
+    <h2 class="titulo">Agregar Cosecha</h2>
+
+    <form class ="formulario" method="post">
+        <input type="text" name="peso" placeholder="Ingresar peso inicial de la cosecha"><br>
+        <input type="text" name="fechaInicio" placeholder="Ingresar la fecha de inicio"><br>
+        <input type="text" name="fechaFin" placeholder="Ingresar la fecha de fin"><br>
+        <input type="submit" value="Agregar">
+    </form>
+
+    </main>
+    EOT;
+
+    if(array_key_exists('peso',$_POST)){
+        agregarDatos3();
+        echo '<script>alert("Datos guardados...");</script>';
+        echo "<script>location.href='cosechas.php'</script>";
+    }
 }
+
 
 function agregarDatos(){
     global $miconexion;
@@ -71,6 +93,17 @@ function agregarDatos2(){
     $precioU = $_POST["precioUnitario"];
     
     $sql = "insert into registromateriaprima values('$id','','1','$cantidad','','$precioU')";
+    
+    $miconexion->consulta($sql);
+}
+
+function agregarDatos3(){
+    global $miconexion;
+    $peso = $_POST["peso"];
+    $fechaI = $_POST["fechaInicio"];
+    $fechaF = $_POST["fechaFin"];
+    
+    $sql = "insert into cosecha values('3','$peso','$fechaI','$fechaF','1')";
     
     $miconexion->consulta($sql);
 }
