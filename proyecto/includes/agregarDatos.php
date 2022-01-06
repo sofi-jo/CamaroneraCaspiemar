@@ -48,7 +48,7 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
 
     if(array_key_exists('nombre',$_POST)){
         agregarDatos2();
-        echo '<script>alert("Datos guardados...");</script>';
+        /*echo '<script>alert("Datos guardados...");</script>';*/
         echo "<script>location.href='materiaPrimaCosecha.php'</script>";
     }
 }elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/cosechas.php') {
@@ -58,7 +58,7 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     <h2 class="titulo">Agregar Cosecha</h2>
 
     <form class ="formulario" method="post">
-        <input type="text" name="peso" placeholder="Ingresar peso inicial de la cosecha"><br>
+        <input type="text" name="peso" placeholder="Ingresar peso de la cosecha"><br>
         <input type="text" name="fechaInicio" placeholder="Ingresar la fecha de inicio"><br>
         <input type="text" name="fechaFin" placeholder="Ingresar la fecha de fin"><br>
         <input type="submit" value="Agregar">
@@ -69,7 +69,7 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
 
     if(array_key_exists('peso',$_POST)){
         agregarDatos3();
-        echo '<script>alert("Datos guardados...");</script>';
+        /*echo '<script>alert("Datos guardados...");</script>';*/
         echo "<script>location.href='cosechas.php'</script>";
     }
 }
