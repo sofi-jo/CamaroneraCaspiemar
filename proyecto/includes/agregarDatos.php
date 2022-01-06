@@ -8,7 +8,7 @@ $miconexion= new clase_mysqli7;
 $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
 
-if($urlFrom == '/Clases/ingenieriaWeb/proyecto/includes/gestionarBDmateriaPrima.php'){
+if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'){
     echo <<< EOT
     <main>
 

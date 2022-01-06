@@ -71,9 +71,30 @@
             if(array_key_exists('cantidad',$_POST)){
                 actualizarDatosMateriaPrimaCosecha();
             }
-        }
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/costosIndirectos.php'){
 
-    } 
+            $sql="select * from costosIndirectos where idcostosIndirectos = $idRegistro";
+            $miconexion->consulta($sql);
+            $listaUser = $miconexion->consultaListaPrueba();
+            echo <<< EOT
+            <main class="content">
+            <h2 class="titulo">Fornmulario de actualización de Costos Indirectos</h2>
+            Producto: $listaUser[0]
+            <form method="post">
+            <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
+            Tipo
+            <input type="text" name="tipoCostos" placeholder="Ingrese el tipo de producto" value = $listaUser[1]><br>
+            <input type="submit" value="Actualizar">
+            </form>
+            </main>
+            EOT;
+    
+            
+            if(array_key_exists('tipo',$_POST)){
+                actualizarDatosCostosIndirectos();
+            }
+        } 
+    }
 
     function actualizarDatosMateriaPrima(){
         $id = $_POST["idRegistro"];
@@ -100,7 +121,18 @@
        echo "<script>location.href='materiaPrimaCosecha.php'</script>";
     }
 
+    
+    function actualizarDatosCostosIndirectos(){
+        $tipo = $_POST["tipoCostos"];
+
+        $sql="update costosIndirectos set tipo = '$tipo' where idcostoIndirecto = '$id'";
+        global $miconexion;
+        $miconexion->consulta($sql);
+   
+       #echo "<script>alert('Datos actualizados....') </script>";
+       #echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
+    }
+
     include("piePagina.php");
+
 ?>
-
-
