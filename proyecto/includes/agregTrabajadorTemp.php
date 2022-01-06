@@ -17,3 +17,4 @@ echo "<script>location.href='trabajadorTemp.php';</script>";
 <?php
 include("piePagina.php");
 ?>
+
