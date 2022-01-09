@@ -8,7 +8,7 @@ $miconexion= new clase_mysqli7;
 $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
 
-if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'){
+if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     echo <<< EOT
     <main>
 
@@ -26,11 +26,11 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     EOT;
 
     if(array_key_exists('descripcionNuevo',$_POST)){
-        agregarDatos();
+        agregarDatosMateriaPrima();
         #echo '<script>alert("Datos guardados...");</script>';
         echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
     }
-}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2' ) {
+}elseif ($urlFrom == $ruta.'materiaPrimaCosecha.php?fase=1' or $urlFrom == $ruta.'materiaPrimaCosecha.php?fase=2' ) {
     echo <<< EOT
     <main class="content">
 
@@ -40,9 +40,9 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     
     EOT;
 
-    $sql = "select nombre from materiaprima";
+    $sql = "select idmateriaprima,nombre from materiaprima";
     $miconexion->consulta($sql);
-    $miconexion->consultaListaReal();
+    $miconexion->consultaListaMateriaPrima();
 
     echo <<< EOT
         <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
@@ -54,15 +54,16 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     EOT;
 
     if(array_key_exists('cantidad',$_POST)){
-        agregarDatos2();
+        agregarDatosMateriaPrimaCosecha();
+
         /*echo '<script>alert("Datos guardados...");</script>';*/
         if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
-            echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
+            //echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
         }else{
             echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
         }
     }
-}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/cosechas.php') {
+}elseif ($urlFrom == $ruta.'cosechas.php') {
     echo <<< EOT
     <main class="content">
     <h2 class="titulo">Agregar Cosecha</h2>
@@ -82,7 +83,7 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     }
 }
 
-elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php') {
+elseif ($urlFrom == $ruta.'trabajadores.php') {
     echo <<< EOT
     <main class="content">
 
@@ -109,7 +110,7 @@ elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php') {
         /*echo '<script>alert("Datos guardados...");</script>';*/
         echo "<script>location.href='cosechas.php'</script>";
     }
-}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=2' ) {
+}elseif ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1' or $urlFrom == $ruta.'registroCostoIndirecto.php?fase=2' ) {
     echo <<< EOT
     <main class="content">
 
@@ -121,7 +122,7 @@ elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php') {
 
     $sql = "select nombre from costosindirectos";
     $miconexion->consulta($sql);
-    $miconexion->consultaListaReal2();
+    $miconexion->consultaListaConsulta();
 
     echo <<< EOT
         <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
@@ -135,7 +136,7 @@ elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php') {
     if(array_key_exists('cantidad',$_POST)){
         agregarDatos2();
         /*echo '<script>alert("Datos guardados...");</script>';*/
-        if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
+        if ($urlFrom == $ruta.'materiaPrimaCosecha.php?fase=1'){
             echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
         }else{
             echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
@@ -144,7 +145,7 @@ elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php') {
 }
 
 
-function agregarDatos(){
+function agregarDatosMateriaPrima(){
     global $miconexion;
     $nombre = $_POST["nombre"];
     $descripcionNuevo = $_POST["descripcionNuevo"];
@@ -155,33 +156,43 @@ function agregarDatos(){
 }
 
 
-function agregarDatos2(){
+function agregarDatosMateriaPrimaCosecha(){
     global $miconexion;
     global $urlFrom;
-    $id = $_POST["busquedacosehcas"];
+    global $ruta;
+    $idMateria = $_POST[""];
+    echo $idMateria;
     $cantidad = $_POST["cantidad"];
     $precioU = $_POST["precioUnitario"];
     $sql = "";
-
+    $total = $cantidad * $precioU;
     
-    if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
-        $sql = "insert into registromateriaprima values('$id','hoy','1','$cantidad','','$precioU')";
+    if ($urlFrom == $ruta.'materiaPrimaCosecha.php?fase=1'){
+        $sql = "insert into registromateriaprima values('','hoy','1','$cantidad','$total','$precioU')";
     }else{
-        $sql = "insert into registromateriaprima values('$id','hoy','2','$cantidad','','$precioU')";
+        $sql = "insert into registromateriaprima values('','hoy','2','$cantidad','$total','$precioU')";
     }
     $miconexion->consulta($sql);
+
+    $sql2 ="SELECT max(idregistroMateriaPrima) from registromateriaprima";
+    $miconexion->consulta($sql2);
+    $idRegistro = $miconexion->consultaListaPrueba($sql2);
+
+    $sql = "insert into registromateriaprima_has_materiaprima
+            values ('$idRegistro[0]','$id')";
+    $miconexion->consulta($sql);
+    
 }
 
-function agregarDatos3(){
+
+function agregarCosecha(){
     global $miconexion;
     $peso = $_POST["peso"];
     $fechaI = $_POST["fechaInicio"];
     $fechaF = $_POST["fechaFin"];
     
-    #$sql = "insert into cosecha values('3','$peso','$fechaI','$fechaF','1')";
     $sql = "INSERT INTO cosecha (peso, fecha, fechaFin, Empresa_idEmpresa) VALUES ('$peso', '$fechaI', '$fechaF', 1)";
-    $miconexion->consulta($sql);
-    
+    $miconexion->consulta($sql);  
 }
 
 include("piePagina.php");

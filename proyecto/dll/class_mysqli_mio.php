@@ -233,19 +233,19 @@ class clase_mysqli7
 	}
 
 
-	function consultaListaReal(){
+	function consultaListaMateriaPrima(){
 		echo <<< EOT
-		<input type="search" name="busquedacosehcas" placeholder = "Materia Prima" list="listamodelos"><br>
+		<input type="search" name="busquedacostoIndirecto" placeholder = "Materia Prima" list="listamodelos"><br>
 		<datalist id="listamodelos">
 		EOT;
 
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-			echo '<option value=' . $row[0] . ">";
+			echo '<option value=' . $row[1] . ">";
 		}
 		echo '</datalist>';
 	}
 
-	function consultaListaReal2(){
+	function consultaListaCostosIndirectos(){
 		echo <<< EOT
 		<input type="search" name="busquedacostoIndirecto" placeholder = "Materia Prima" list="listamodelos"><br>
 		<datalist id="listamodelos">

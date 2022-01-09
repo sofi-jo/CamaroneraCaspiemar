@@ -24,11 +24,19 @@
     
 
     if ($fase == 1){
-        $sql="SELECT idRegistroMateriaPrima, fecha'FECHA', fase_idFase'Fase Actual', cantidad'Cantidad', costoUnitario'Costo Unitario',
-        Total'Total' FROM `registromateriaprima` WHERE fase_idFase = 1"; 
+        $sql="SELECT idRegistroMateriaPrima, m.nombre'Nombre', fecha'FECHA', cantidad'Cantidad', costoUnitario'Costo Unitario',
+        Total'Total' 
+        FROM registromateriaprima rm
+        INNER JOIN registromateriaprima_has_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
+        INNER JOIN materiaprima m ON m.idmateriaprima  = r.materiaPrima_idmateriaPrima
+        WHERE rm.fase_idFase = 1;"; 
     }elseif($fase == 2){
-        $sql="SELECT idRegistroMateriaPrima, fecha'FECHA', fase_idFase'Fase Actual', cantidad'Cantidad', costoUnitario'Costo Unitario',
-        Total'Total' FROM `registromateriaprima` WHERE fase_idFase = 2";
+        $sql="SELECT idRegistroMateriaPrima, m.nombre'Nombre', fecha'FECHA', cantidad'Cantidad', costoUnitario'Costo Unitario',
+        Total'Total' 
+        FROM registromateriaprima rm
+        INNER JOIN registromateriaprima_has_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
+        INNER JOIN materiaprima m ON m.idmateriaprima  = r.materiaPrima_idmateriaPrima
+        WHERE rm.fase_idFase = 2;";
     }
     // es necesario que haya una consulta antes de llamar a una funcion, en el caso de llamar a dos funciones solo reconocera la primera
 
