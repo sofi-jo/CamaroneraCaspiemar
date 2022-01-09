@@ -232,16 +232,17 @@ class clase_mysqli7
 		echo "</table>";
 	}
 
-/* 	<td>
-	<form action="editarDatos.php">
-	<select name="tipoEdit" onchange="this.form.submit()">
-	<option>...</option>
-	<option value = "Actualizar\&idRegsitro=$row[0]">Actualizar</option>
-	<option>Eliminar</option>
-	</select>
-	</form>
-	</td>
-	</tr> */
-	//Retorna una lista de la consulta JSON
+
+	function consultaListaReal(){
+		echo <<< EOT
+		<input type="search" name="busquedamodelos" list="listamodelos">
+		<datalist id="listamodelos">
+		EOT;
+
+		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
+			echo '<option value=' . $row[0] . ">";
+		}
+		echo '</datalist>';
+	}
 
 }

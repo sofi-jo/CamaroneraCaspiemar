@@ -13,11 +13,11 @@
 
     if($resultado->num_rows > 0){
         $salida.= "<table class='tabla_datos'>
-                        <thread>
+                        <thead>
                             <tr>
                             <td>Nombre</td>
                             </tr>
-                        </thread>
+                        </thead>
                         <tbody>";
 
         while($fila= $resultado->fetch_assoc()){

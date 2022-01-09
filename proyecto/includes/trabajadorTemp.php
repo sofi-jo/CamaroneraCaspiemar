@@ -2,7 +2,7 @@
     include("cabeceraInterna.php");
     include("../dll/class_mysqli_mio.php");
 
-    cho '<h2 class = "titulo">Gestionar Trabajadores</h2>';
+    echo '<h2 class = "titulo">Gestionar Trabajadores</h2>';
     echo '<main class="content">';
 
 		$miconexion= new clase_mysqli7;

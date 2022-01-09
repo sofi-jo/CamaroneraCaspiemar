@@ -1,5 +1,5 @@
 <?php
-include("../dll/class_mysqli.php");
+include("../dll/class_mysqli_mio.php");
 include("cabeceraInterna.php");
 extract($_POST);
 extract($_GET);
@@ -30,14 +30,22 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
         #echo '<script>alert("Datos guardados...");</script>';
         echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
     }
-}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php') {
+}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1') {
     echo <<< EOT
     <main class="content">
 
     <h1>Agregar Materia Prima a la Cosecha</h2>
 
     <form class ="formulario" method="post">
+    
         <input type="text" name="nombre" placeholder="Ingresar nombre del producto"><br>
+    EOT;
+
+    $sql = "select nombre from materiaprima";
+    $miconexion->consulta($sql);
+    $miconexion->consultaListaReal();
+
+    echo <<< EOT
         <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
         <input type="text" name="precioUnitario" placeholder="Ingresar precio unitario"><br>
         <input type="submit" value="Agregar">
@@ -49,18 +57,44 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     if(array_key_exists('nombre',$_POST)){
         agregarDatos2();
         /*echo '<script>alert("Datos guardados...");</script>';*/
-        echo "<script>location.href='materiaPrimaCosecha.php'</script>";
+        //echo "<script>location.href='materiaPrimaCosecha.php'</script>";
     }
 }elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/cosechas.php') {
     echo <<< EOT
     <main class="content">
-
     <h2 class="titulo">Agregar Cosecha</h2>
-
     <form class ="formulario" method="post">
         <input type="text" name="peso" placeholder="Ingresar peso de la cosecha"><br>
         <input type="text" name="fechaInicio" placeholder="Ingresar la fecha de inicio"><br>
         <input type="text" name="fechaFin" placeholder="Ingresar la fecha de fin"><br>
+        <input type="submit" value="Agregar">
+    </form>
+    </main>
+    EOT;
+
+    if(array_key_exists('peso',$_POST)){
+        agregarDatos3();
+        /*echo '<script>alert("Datos guardados...");</script>';*/
+        #echo "<script>location.href='cosechas.php'</script>";
+    }
+}
+
+elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php') {
+    echo <<< EOT
+    <main class="content">
+
+    <h2 class="titulo">Agregar Trabajador</h2>
+
+    <form class ="formulario" method="post">
+        <input type="text" name="tipo" placeholder="Ingresar precio x hora"><br>
+        <input type="text" name="precioHora" placeholder="Ingrese el precio por hora"><br>
+        <input type="text" name="cantidadHoras" placeholder="Ingresar cantidad horas trabajadas"><br>
+        <input type="text" name="telefono" placeholder="Ingresar telefono"><br>
+        <input type="text" name="correo" placeholder="Ingresar correo"><br>
+        <input type="text" name="nombres" placeholder="Ingresar nombres"><br>
+        <input type="text" name="apellidos" placeholder="Ingresar apellidos"><br>
+        <input type="text" name="aportacionIESS" placeholder="Ingresar aportacion IESS"><br>
+        <input type="text" name="salario" placeholder="Ingresar salario"><br>
         <input type="submit" value="Agregar">
     </form>
 
@@ -68,7 +102,7 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     EOT;
 
     if(array_key_exists('peso',$_POST)){
-        agregarDatos3();
+        #agregarDatos3();
         /*echo '<script>alert("Datos guardados...");</script>';*/
         echo "<script>location.href='cosechas.php'</script>";
     }
@@ -80,7 +114,7 @@ function agregarDatos(){
     $nombre = $_POST["nombre"];
     $descripcionNuevo = $_POST["descripcionNuevo"];
     
-    $sql = "insert into materiaprima values('','$descripcionNuevo','$nombre')";
+    $sql = "insert into materiaprima values('','$nombre','$descripcionNuevo')";
     
     $miconexion->consulta($sql);
 }
@@ -88,11 +122,15 @@ function agregarDatos(){
 
 function agregarDatos2(){
     global $miconexion;
+    $fase = $_GET['fase'];
     $id = $_POST["nombre"];
     $cantidad = $_POST["cantidad"];
     $precioU = $_POST["precioUnitario"];
     
-    $sql = "insert into registromateriaprima values('$id','','1','$cantidad','','$precioU')";
+    if ($fase == 1){
+        $sql = "insert into registromateriaprima values('$id','hoy','1','$cantidad','','$precioU')";
+    }
+    $sql = "insert into registromateriaprima values('$id','hoy','1','$cantidad','','$precioU')";
     
     $miconexion->consulta($sql);
 }
@@ -103,9 +141,10 @@ function agregarDatos3(){
     $fechaI = $_POST["fechaInicio"];
     $fechaF = $_POST["fechaFin"];
     
-    $sql = "insert into cosecha values('3','$peso','$fechaI','$fechaF','1')";
-    
+    #$sql = "insert into cosecha values('3','$peso','$fechaI','$fechaF','1')";
+    $sql = "INSERT INTO cosecha (peso, fecha, fechaFin, Empresa_idEmpresa) VALUES ('$peso', '$fechaI', '$fechaF', 1)";
     $miconexion->consulta($sql);
+    
 }
 
 include("piePagina.php");

@@ -7,19 +7,24 @@
  	$miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
     if ($tipoEdit == 'Eliminar'){
-        if($urlFrom == '/camaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'){
+        if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'){
             $sql="delete from materiaprima where idmateriaPrima=$idRegistro";
             $miconexion->consulta($sql);
     
             echo "<script>alert('Datos elimanados....') </script>";
             echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
         
-        }elseif($urlFrom == '/camaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php'){
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php'){
             $sql="delete from registromateriaprima where idregistromateriaPrima=$idRegistro";
             $miconexion->consulta($sql);
     
-            echo "<script>alert('Datos elimanados....') </script>";
             echo "<script>location.href='materiaPrimaCosecha.php'</script>";
+        
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php'){
+            $sql="delete from trabajador where cedula=$idRegistro";
+            $miconexion->consulta($sql);
+    
+            echo "<script>location.href='trabajadores.php'</script>";
         }
 
     } 
