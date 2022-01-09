@@ -1,4 +1,5 @@
 <?php
+
 session_start();
  
 // Verificar si el usuario esta registrado
@@ -7,7 +8,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
   exit;
 }
  
-require_once "config.php";
+require_once "../../dll/config.php";
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -15,7 +16,7 @@ $username_err = $password_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+
     // Si el usuario esta vacio verificar
     if(empty(trim($_POST["username"]))){
         $username_err = "Por favor ingrese su usuario.";

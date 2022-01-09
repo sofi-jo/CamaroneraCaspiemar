@@ -97,14 +97,15 @@ class clase_mysqli7
 	{
 		echo "<table class ='tabla'>";
 		echo "<tr>";
-		for ($i = 0; $i < $this->numcampos(); $i++) {
+		echo "<thead>";
+		for ($i = 1; $i < $this->numcampos(); $i++) {
 			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
 		}
-		echo "<td></td>";
+		echo "<thead/>";
 		echo "</tr>";
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
-			for ($i = 0; $i < $this->numcampos(); $i++) {
+			for ($i = 1; $i < $this->numcampos(); $i++) {
 				echo "<td>" . $row[$i] . "</td>";
 			}
 			echo "<td><a href='crudCosechas.php?idRegistro=$row[0]'>Visualizar</a></td>";
@@ -202,7 +203,7 @@ class clase_mysqli7
 		echo "<table class = 'tabla'>";
 		echo "<thead>";
 		echo "<tr>";
-		for ($i = 0; $i < $this->numcampos(); $i++) {
+		for ($i = 1; $i < $this->numcampos(); $i++) {
 			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
 		}
 		echo "<td>Editar</td>";
@@ -211,7 +212,7 @@ class clase_mysqli7
 		echo "</tr>";
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
-			for ($i = 0; $i < $this->numcampos(); $i++) {
+			for ($i = 1; $i < $this->numcampos(); $i++) {
 				echo "<td>" . $row[$i] . "</td>";
 			}
 			$link = $_SERVER['REQUEST_URI'];
@@ -231,16 +232,17 @@ class clase_mysqli7
 		echo "</table>";
 	}
 
-/* 	<td>
-	<form action="editarDatos.php">
-	<select name="tipoEdit" onchange="this.form.submit()">
-	<option>...</option>
-	<option value = "Actualizar\&idRegsitro=$row[0]">Actualizar</option>
-	<option>Eliminar</option>
-	</select>
-	</form>
-	</td>
-	</tr> */
-	//Retorna una lista de la consulta JSON
+
+	function consultaListaReal(){
+		echo <<< EOT
+		<input type="search" name="busquedamodelos" list="listamodelos">
+		<datalist id="listamodelos">
+		EOT;
+
+		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
+			echo '<option value=' . $row[0] . ">";
+		}
+		echo '</datalist>';
+	}
 
 }

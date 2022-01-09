@@ -7,32 +7,37 @@
  	$miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
     if ($tipoEdit == 'Eliminar'){
-        if($urlFrom == '/camaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'){
+        if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'){
             $sql="delete from materiaprima where idmateriaPrima=$idRegistro";
             $miconexion->consulta($sql);
     
             echo "<script>alert('Datos elimanados....') </script>";
             echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
         
-        }elseif($urlFrom == '/camaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php'){
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php'){
             $sql="delete from registromateriaprima where idregistromateriaPrima=$idRegistro";
             $miconexion->consulta($sql);
     
-            echo "<script>alert('Datos elimanados....') </script>";
             echo "<script>location.href='materiaPrimaCosecha.php'</script>";
+        
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php'){
+            $sql="delete from trabajador where cedula=$idRegistro";
+            $miconexion->consulta($sql);
+    
+            echo "<script>location.href='trabajadores.php'</script>";
         }
 
     } 
 
     if ($tipoEdit == 'Actualizar'){
-        if($urlFrom == '/camaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'){
+        if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'){
 
             $sql="select * from materiaprima where idmateriaPrima = $idRegistro";
             $miconexion->consulta($sql);
             $listaUser = $miconexion->consultaListaPrueba();
             echo <<< EOT
             <main class="content">
-            <h2>Fornmulario de actualización de productos</h2>
+            <h2 class="titulo">Fornmulario de actualización de productos</h2>
             <form method="post">
             <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
             <input type="text" name="nombre" value = $listaUser[2]><br>
@@ -45,15 +50,16 @@
             
             if(array_key_exists('descripcion',$_POST)){
                 actualizarDatosMateriaPrima();
+                
             }
-        }elseif($urlFrom == '/camaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php'){
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php'){
 
             $sql="select * from registromateriaprima where idregistromateriaPrima = $idRegistro";
             $miconexion->consulta($sql);
             $listaUser = $miconexion->consultaListaPrueba();
             echo <<< EOT
             <main class="content">
-            <h2>Fornmulario de actualización de productos de la Cosecha</h2>
+            <h2 class="titulo">Fornmulario de actualización de productos de la Cosecha</h2>
             Producto: $listaUser[0]
             <form method="post">
             <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
@@ -70,9 +76,30 @@
             if(array_key_exists('cantidad',$_POST)){
                 actualizarDatosMateriaPrimaCosecha();
             }
-        }
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/costosIndirectos.php'){
 
-    } 
+            $sql="select * from costosIndirectos where idcostosIndirectos = $idRegistro";
+            $miconexion->consulta($sql);
+            $listaUser = $miconexion->consultaListaPrueba();
+            echo <<< EOT
+            <main class="content">
+            <h2 class="titulo">Fornmulario de actualización de Costos Indirectos</h2>
+            Producto: $listaUser[0]
+            <form method="post">
+            <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
+            Tipo
+            <input type="text" name="tipoCostos" placeholder="Ingrese el tipo de producto" value = $listaUser[1]><br>
+            <input type="submit" value="Actualizar">
+            </form>
+            </main>
+            EOT;
+    
+            
+            if(array_key_exists('tipo',$_POST)){
+                actualizarDatosCostosIndirectos();
+            }
+        } 
+    }
 
     function actualizarDatosMateriaPrima(){
         $id = $_POST["idRegistro"];
@@ -99,7 +126,18 @@
        echo "<script>location.href='materiaPrimaCosecha.php'</script>";
     }
 
+    
+    function actualizarDatosCostosIndirectos(){
+        $tipo = $_POST["tipoCostos"];
+
+        $sql="update costosIndirectos set tipo = '$tipo' where idcostoIndirecto = '$id'";
+        global $miconexion;
+        $miconexion->consulta($sql);
+   
+       #echo "<script>alert('Datos actualizados....') </script>";
+       #echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
+    }
+
     include("piePagina.php");
+
 ?>
-
-
