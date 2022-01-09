@@ -235,7 +235,7 @@ class clase_mysqli7
 
 	function consultaListaReal(){
 		echo <<< EOT
-		<input type="search" name="busquedamodelos" list="listamodelos">
+		<input type="search" name="busquedamodelos" placeholder = "Materia Prima" list="listamodelos"><br>
 		<datalist id="listamodelos">
 		EOT;
 

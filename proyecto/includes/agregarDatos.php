@@ -34,11 +34,10 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     echo <<< EOT
     <main class="content">
 
-    <h1>Agregar Materia Prima a la Cosecha</h2>
+    <h2 class ="titulo">Agregar Materia Prima a la Cosecha</h2>
 
     <form class ="formulario" method="post">
     
-        <input type="text" name="nombre" placeholder="Ingresar nombre del producto"><br>
     EOT;
 
     $sql = "select nombre from materiaprima";
