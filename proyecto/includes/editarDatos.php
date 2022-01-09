@@ -14,9 +14,15 @@
             echo "<script>alert('Datos elimanados....') </script>";
             echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
         
-        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php'){
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2'){
             $sql="delete from registromateriaprima where idregistromateriaPrima=$idRegistro";
             $miconexion->consulta($sql);
+
+            if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
+                echo "<script>location.href='/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'</script>";
+            }else{
+                echo "<script>location.href='/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2'</script>";
+            }
     
             echo "<script>location.href='materiaPrimaCosecha.php'</script>";
         
@@ -50,9 +56,10 @@
             
             if(array_key_exists('descripcion',$_POST)){
                 actualizarDatosMateriaPrima();
+                echo "<script>location.href='/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'</script>";
                 
             }
-        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php'){
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2'){
 
             $sql="select * from registromateriaprima where idregistromateriaPrima = $idRegistro";
             $miconexion->consulta($sql);
@@ -72,9 +79,16 @@
             </main>
             EOT;
     
-            
             if(array_key_exists('cantidad',$_POST)){
                 actualizarDatosMateriaPrimaCosecha();
+                
+                if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
+                    echo "<script>location.href='/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'</script>";
+                }else{
+                    echo "<script>location.href='/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2'</script>";
+                }
+        
+                echo "<script>location.href='materiaPrimaCosecha.php'</script>";
             }
         }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/costosIndirectos.php'){
 
@@ -122,8 +136,8 @@
         global $miconexion;
         $miconexion->consulta($sql);
    
-       echo "<script>alert('Datos actualizados....') </script>";
-       echo "<script>location.href='materiaPrimaCosecha.php'</script>";
+       #echo "<script>alert('Datos actualizados....') </script>";
+       #echo "<script>location.href='materiaPrimaCosecha.php'</script>";
     }
 
     

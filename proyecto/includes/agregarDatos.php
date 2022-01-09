@@ -30,7 +30,7 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
         #echo '<script>alert("Datos guardados...");</script>';
         echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
     }
-}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1') {
+}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2' ) {
     echo <<< EOT
     <main class="content">
 
@@ -53,10 +53,14 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     </main>
     EOT;
 
-    if(array_key_exists('nombre',$_POST)){
+    if(array_key_exists('cantidad',$_POST)){
         agregarDatos2();
         /*echo '<script>alert("Datos guardados...");</script>';*/
-        //echo "<script>location.href='materiaPrimaCosecha.php'</script>";
+        if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
+        }else{
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
+        }
     }
 }elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/cosechas.php') {
     echo <<< EOT
@@ -74,7 +78,7 @@ if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.p
     if(array_key_exists('peso',$_POST)){
         agregarDatos3();
         /*echo '<script>alert("Datos guardados...");</script>';*/
-        #echo "<script>location.href='cosechas.php'</script>";
+        echo "<script>location.href='cosechas.php'</script>";
     }
 }
 
@@ -105,6 +109,38 @@ elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php') {
         /*echo '<script>alert("Datos guardados...");</script>';*/
         echo "<script>location.href='cosechas.php'</script>";
     }
+}elseif ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=2' ) {
+    echo <<< EOT
+    <main class="content">
+
+    <h2 class ="titulo">Agregar Costos Indirectos a la Cosecha</h2>
+
+    <form class ="formulario" method="post">
+    
+    EOT;
+
+    $sql = "select nombre from costosindirectos";
+    $miconexion->consulta($sql);
+    $miconexion->consultaListaReal2();
+
+    echo <<< EOT
+        <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
+        <input type="text" name="precioUnitario" placeholder="Ingresar precio unitario"><br>
+        <input type="submit" value="Agregar">
+    </form>
+
+    </main>
+    EOT;
+
+    if(array_key_exists('cantidad',$_POST)){
+        agregarDatos2();
+        /*echo '<script>alert("Datos guardados...");</script>';*/
+        if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
+        }else{
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
+        }
+    }
 }
 
 
@@ -121,16 +157,18 @@ function agregarDatos(){
 
 function agregarDatos2(){
     global $miconexion;
-    $fase = $_GET['fase'];
-    $id = $_POST["nombre"];
+    global $urlFrom;
+    $id = $_POST["busquedacosehcas"];
     $cantidad = $_POST["cantidad"];
     $precioU = $_POST["precioUnitario"];
+    $sql = "";
+
     
-    if ($fase == 1){
+    if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
         $sql = "insert into registromateriaprima values('$id','hoy','1','$cantidad','','$precioU')";
+    }else{
+        $sql = "insert into registromateriaprima values('$id','hoy','2','$cantidad','','$precioU')";
     }
-    $sql = "insert into registromateriaprima values('$id','hoy','1','$cantidad','','$precioU')";
-    
     $miconexion->consulta($sql);
 }
 
