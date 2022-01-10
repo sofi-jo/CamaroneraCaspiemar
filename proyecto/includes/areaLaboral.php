@@ -2,17 +2,17 @@
     include("cabeceraInterna.php");
     include("../dll/class_mysqli_mio.php");
 
+
+
     echo '<h2 class = "titulo">Gestionar Area Laboral</h2>';
     echo '<main class="content">';
-    
-		$miconexion= new clase_mysqli7;
-		$miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
-		$miconexion->consulta("select idAreaLaboral, tipo from areaLaboral");
-		$miconexion->verconsulta3();
-	
+   
+    echo '<div class = "agregar"><a href="' . $urlSitio . 'includes/formuAreaLaboral.php">Agregar +</a></div>';
 
-    <a href="<?php echo $urlSitio; ?>includes/formuAreaLaboral.php">agregar</a>
-
+	$miconexion= new clase_mysqli7;
+	$miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
+	$miconexion->consulta("select id_areaLaboral 'Id', nombre_area 'Nombre Area', total_salario 'Total' from arealaboral");
+	$miconexion->verconsulta3();
 
     echo '</main>';
  
