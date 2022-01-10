@@ -8,7 +8,7 @@ $miconexion= new clase_mysqli7;
 $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
 //insert, delete, update, listar
-$sql = "insert into areaLaboral values('$id')";
+$sql = "insert into areaLaboral values('$cedula', '$tipo', '$catidad_horas', '$telefono', '$correo', '$apellidos','$nombres', '$areaLaboral_id_areaLaboral')";
 $miconexion->consulta($sql);
 
 echo '<script>alert("Datos guardados...");</script>';

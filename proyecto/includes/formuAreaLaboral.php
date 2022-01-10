@@ -9,8 +9,9 @@ include("../dll/class_mysqli.php");
 		
 		<form class ="formulario" method="post" action="agregAreaLaboral.php">
             //Trabajador fijo
-            <input type="text" name="areaLaboral" placeholder="Ingresar Area laboral"><br>
+            <input type="text" name="arealaboral" placeholder="Ingresar Area laboral"><br>
             <input type="text" name="sueldo" placeholder="Ingresar Sueldo"><br>
+			<input type="submit" value="Agregar">
 		</form>
 		
 	</main>
