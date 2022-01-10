@@ -8,13 +8,13 @@
         <h3 class="titulo3">Fase 1: Pre-Cria</h3>
         <div class="opciones">
             <a href="<?php echo $urlSitio; ?>includes/materiaPrimaCosecha.php?fase=1">Materia Prima</a>
-            <a href="<?php echo $urlSitio; ?>includes/trabajadores.php">Mano de Obra</a>
+            <a href="<?php echo $urlSitio; ?>includes/trabajadorTemp.php">Mano de Obra</a>
             <a href="<?php echo $urlSitio; ?>includes/registroCostoIndirecto.php?fase=1">Costos Indirectos</a>
         </div>
         <h3 class="titulo3">Fase 2: Engorde</h3>
         <div class="opciones">
             <a href="<?php echo $urlSitio; ?>includes/materiaPrimaCosecha.php?fase=2">Materia Prima</a>
-            <a href="<?php echo $urlSitio; ?>includes/trabajadores.php">Mano de Obra</a>
+            <a href="<?php echo $urlSitio; ?>includes/trabajadorTemp.php">Mano de Obra</a>
             <a href="<?php echo $urlSitio; ?>includes/registroCostoIndirecto.php?fase=2">Costos Indirectos</a>
         </div>
     </div>
