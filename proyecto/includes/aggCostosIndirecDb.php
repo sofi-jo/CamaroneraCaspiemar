@@ -8,7 +8,7 @@ $miconexion= new clase_mysqli7;
 $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
 //insert, delete, update, listar
-$sql = "insert into costosindirectos values('','$tipo', '$nombre')";
+$sql = "insert into costosindirectos values('','$nombre', '$tipo')";
 $miconexion->consulta($sql);
 
 #echo '<script>alert("Datos guardados...");</script>';

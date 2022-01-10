@@ -5,17 +5,8 @@
     extract($_GET) ;
 
     echo '<main class="content">';
-    echo "<h2 class='titulo'>Materia Prima</h2>";
+    echo "<h2 class='titulo'>Costos Indirectos</h2>";
     echo '<label id="texto_nav1"></label>';
-
-    echo <<< EOT
-    '<script>
-    var url = document.referrer;;
-    var objetivo = document.getElementById('texto_nav1');
-    objetivo.innerHTML = url;
-    </script>'
-    EOT;
-
 
     echo '<div class="agregar"><a href=agregarDatos.php?urlFrom=' . $link . '>Agregar +</a></div>';
 
@@ -24,9 +15,17 @@
     //$sql = "";
 
     if ($fase == 1){
-        $sql = "SELECT idregistroCostosIndirectos, fecha'Fecha', Fase_idFase'Fase', totalCostoIndirecto'Total' FROM registrocostosindirectos WHERE Fase_idFase = 1";
+        $sql ="SELECT idcostosIndirectos, c.nombre, rc.fecha'Fecha', rc.totalCostoIndirecto'Total'
+        FROM registrocostosindirectos rc
+        INNER JOIN registrocostosindirectos_has_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
+        INNER JOIN costosindirectos c ON c.idcostosIndirectos = r.costosIndirectos_idcostosIndirectos
+        WHERE rc.fase_idFase = 1;";
     }elseif($fase == 2){
-        $sql = "SELECT idregistroCostosIndirectos, fecha'Fecha', Fase_idFase'Fase', totalCostoIndirecto'Total' FROM registrocostosindirectos WHERE Fase_idFase = 2";
+        $sql = "SELECT idcostosIndirectos, c.nombre, rc.fecha'Fecha', rc.totalCostoIndirecto'Total'
+        FROM registrocostosindirectos rc
+        INNER JOIN registrocostosindirectos_has_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
+        INNER JOIN costosindirectos c ON c.idcostosIndirectos = r.costosIndirectos_idcostosIndirectos
+        WHERE rc.fase_idFase = 2;";
     }
     // es necesario que haya una consulta antes de llamar a una funcion, en el caso de llamar a dos funciones solo reconocera la primera
 

@@ -63,6 +63,35 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
             echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
         }
     }
+}elseif($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'or $urlFrom == $ruta.'registroCostoIndirecto.php?fase=2'){
+    echo <<< EOT
+    <main class="content">
+    <h2 class ="titulo">Agregar Costos Indirectos</h2>
+    <form class ="formulario" method="post">
+    EOT;
+
+    $sql = "select idcostosIndirectos, nombre from costosindirectos";
+    $miconexion->consulta($sql);
+    $miconexion->consultaListaMateriaPrima();
+
+    echo <<< EOT
+        <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
+        <input type="submit" value="Agregar">
+    </form>
+
+    </main>
+    EOT;
+
+    if(array_key_exists('cantidad',$_POST)){
+        agregarDatosCostosIndirectosCosecha();
+
+        /*echo '<script>alert("Datos guardados...");</script>';*/
+        if ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'){
+            echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
+        }else{
+            echo "<script>location.href='registroCostoIndirecto.php?fase=2'</script>";
+        }
+    }
 }elseif ($urlFrom == $ruta.'cosechas.php') {
     echo <<< EOT
     <main class="content">
@@ -110,39 +139,8 @@ elseif ($urlFrom == $ruta.'trabajadores.php') {
         /*echo '<script>alert("Datos guardados...");</script>';*/
         echo "<script>location.href='cosechas.php'</script>";
     }
-}elseif ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1' or $urlFrom == $ruta.'registroCostoIndirecto.php?fase=2' ) {
-    echo <<< EOT
-    <main class="content">
-
-    <h2 class ="titulo">Agregar Costos Indirectos a la Cosecha</h2>
-
-    <form class ="formulario" method="post">
-    
-    EOT;
-
-    $sql = "select nombre from costosindirectos";
-    $miconexion->consulta($sql);
-    $miconexion->consultaListaConsulta();
-
-    echo <<< EOT
-        <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
-        <input type="text" name="precioUnitario" placeholder="Ingresar precio unitario"><br>
-        <input type="submit" value="Agregar">
-    </form>
-
-    </main>
-    EOT;
-
-    if(array_key_exists('cantidad',$_POST)){
-        agregarDatos2();
-        /*echo '<script>alert("Datos guardados...");</script>';*/
-        if ($urlFrom == $ruta.'materiaPrimaCosecha.php?fase=1'){
-            echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
-        }else{
-            echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
-        }
-    }
 }
+
 
 
 function agregarDatosMateriaPrima(){
@@ -160,30 +158,56 @@ function agregarDatosMateriaPrimaCosecha(){
     global $miconexion;
     global $urlFrom;
     global $ruta;
-    $idMateria = $_POST[""];
-    echo $idMateria;
     $cantidad = $_POST["cantidad"];
     $precioU = $_POST["precioUnitario"];
     $sql = "";
     $total = $cantidad * $precioU;
-    
+    date_default_timezone_set('America/Bogota');
+    $fechaActual = date('Y-m-d');
+   
     if ($urlFrom == $ruta.'materiaPrimaCosecha.php?fase=1'){
-        $sql = "insert into registromateriaprima values('','hoy','1','$cantidad','$total','$precioU')";
+        $sql = "insert into registromateriaprima values('','$fechaActual','1','$cantidad','$total','$precioU')";
     }else{
-        $sql = "insert into registromateriaprima values('','hoy','2','$cantidad','$total','$precioU')";
+        $sql = "insert into registromateriaprima values('','$fechaActual','2','$cantidad','$total','$precioU')";
     }
     $miconexion->consulta($sql);
 
-    $sql2 ="SELECT max(idregistroMateriaPrima) from registromateriaprima";
+    /* $sql2 ="SELECT max(idregistroMateriaPrima) from registromateriaprima";
     $miconexion->consulta($sql2);
     $idRegistro = $miconexion->consultaListaPrueba($sql2);
 
     $sql = "insert into registromateriaprima_has_materiaprima
             values ('$idRegistro[0]','$id')";
-    $miconexion->consulta($sql);
+    $miconexion->consulta($sql); */
     
 }
 
+function agregarDatosCostosIndirectosCosecha(){
+    global $miconexion;
+    global $urlFrom;
+    global $ruta;
+    $idMateria = $_POST[""];
+    echo $idMateria;
+    $cantidad = $_POST["cantidad"];
+    $sql = "";
+    date_default_timezone_set('America/Bogota');
+    $fechaActual = date('Y-m-d');
+    if ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'){
+        $sql = "insert into registrocostosindirectos values('','$fechaActual','1','$cantidad')";
+    }else{
+        $sql = "insert into registromateriaprima values('','$fechaActual','2','$cantidad')";
+    }
+    $miconexion->consulta($sql);
+
+    /* $sql2 ="SELECT max(idregistroMateriaPrima) from registromateriaprima";
+    $miconexion->consulta($sql2);
+    $idRegistro = $miconexion->consultaListaPrueba($sql2);
+
+    $sql = "insert into registromateriaprima_has_materiaprima
+            values ('$idRegistro[0]','$id')";
+    $miconexion->consulta($sql); */
+    
+}
 
 function agregarCosecha(){
     global $miconexion;

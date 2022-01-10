@@ -8,13 +8,6 @@
     echo "<h2 class='titulo'>Materia Prima</h2>";
     echo '<label id="texto_nav1"></label>';
 
-    echo <<< EOT
-    '<script>
-    var url = document.referrer;;
-    var objetivo = document.getElementById('texto_nav1');
-    objetivo.innerHTML = url;
-    </script>'
-    EOT;
 
 
     echo '<div class="agregar"><a href=agregarDatos.php?urlFrom=' . $link . '>Agregar +</a></div>';
