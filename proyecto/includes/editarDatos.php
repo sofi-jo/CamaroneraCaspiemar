@@ -26,11 +26,11 @@
     
             echo "<script>location.href='materiaPrimaCosecha.php'</script>";
         
-        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/trabajadores.php'){
-            $sql="delete from trabajador where cedula=$idRegistro";
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/arealaboral.php'){
+            $sql="delete from arealaboral where id_areaLaboral=$idRegistro";
             $miconexion->consulta($sql);
     
-            echo "<script>location.href='trabajadores.php'</script>";
+            echo "<script>location.href='arealaboral.php'</script>";
         }
 
     } 

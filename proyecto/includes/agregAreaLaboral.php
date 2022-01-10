@@ -8,7 +8,7 @@ $miconexion= new clase_mysqli7;
 $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
 //insert, delete, update, listar
-$sql = "insert into arealaboral values('', '$nombre_area','$total_salario')";
+$sql = "insert into arealaboral values('', '$arealaboral','$sueldo')";
 $miconexion->consulta($sql);
 
 echo "<script>location.href='arealaboral.php';</script>";
