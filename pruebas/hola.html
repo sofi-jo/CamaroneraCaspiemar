@@ -9,19 +9,16 @@
 </head>
 <body>
     
-    <input type="search" name="busquedamodelos" list="listamodelos">
-    
-    <datalist id="listamodelos">
-    
-      <option value="Camaro">
-    
-      <option value="Corvette">
-    
-      <option value="Impala">
-    
-      <option value="Colorado">
-    
-    </datalist>
+  <input id="ocorrenciaSetup" list="ocorrenciasListSetup" name="ocorrenciasListSetup" autocomplete="off">
+  <datalist id="ocorrenciasListSetup">
+       <option data-value="1.1" data-tipo="1" value="SETUP | [1.1]"></option>
+       <option data-value="1.10" data-tipo="1" value="CONSERTO NO CLICHE | [1.10]"></option>
+  </datalist>
+
+  <script>
+    var datavalue = $('#ocorrenciasListSetup').find('option[value="' + $('#ocorrenciaSetup').val() + '"]').attr('data-value');
+    console.log(datavalue);
+  </script>
         
 </body>
 </html>
