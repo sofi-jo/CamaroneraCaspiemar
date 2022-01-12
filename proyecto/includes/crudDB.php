@@ -4,7 +4,7 @@
     <h2 class="titulo">Gestionar Base de Datos</h2>
     <div class="opciones">
         <a href="<?php echo $urlSitio; ?>includes/gestionarBDmateriaPrima.php">Materia Prima</a>
-        <a href="<?php echo $urlSitio; ?>includes/arealaboral.php">Mano de Obra</a>
+        <a href="<?php echo $urlSitio; ?>includes/areasLaboralesT.php">Mano de Obra</a>
         <a href="<?php echo $urlSitio; ?>includes/costosIndirectos.php">Costos Indirectos</a>
     </div>
         
