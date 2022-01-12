@@ -34,6 +34,29 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
     <h2 class ="titulo">Agregar Materia Prima a la Cosecha</h2>
 
+    <script>
+
+    function datosclick() {
+        var inputval= $("#listamodelos").val();
+        var oldval= $('datalist option[value='+inputval+']').attr('oldvalue');
+        if (oldval)
+            alert(oldval);
+
+        //document.getElementById('form1').submit();
+    }
+
+    /*$(document).ready(function(){
+
+        $('submit').on('click', function(){
+            var inputval= $("#listamodelos").val();
+            var oldval= $('datalist option[value='+inputval+']').attr('oldvalue');
+            if (oldval)
+                alert(oldval);
+        });
+                                
+    }); */
+    </script>
+
     <form class ="formulario" method="post">
     
     EOT;
@@ -42,10 +65,11 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     $miconexion->consulta($sql);
     $miconexion->consultaListaMateriaPrima();
 
+    
     echo <<< EOT
         <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
         <input type="text" name="precioUnitario" placeholder="Ingresar precio unitario"><br>
-        <input type="submit" value="Agregar">
+        <input type="submit" value="Agregar" onclick="datosclick();">
     </form>
 
     </main>
@@ -92,19 +116,46 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     }
 }elseif ($urlFrom == $ruta.'cosechas.php') {
     echo <<< EOT
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#campofechainicio" ).datepicker({
+        numberOfMonths: 1,
+      });
+      $( "#campofechafin" ).datepicker({
+        numberOfMonths: 1,
+      });
+
+      $( "#campofechainicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+      $( "#campofechafin" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+      //var date = $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+    } );
+    </script>
+    
     <main class="content">
     <h2 class="titulo">Agregar Cosecha</h2>
     <form class ="formulario" method="post">
         <input type="text" name="peso" placeholder="Ingresar peso de la cosecha"><br>
-        <input type="text" name="fechaInicio" placeholder="Ingresar la fecha de inicio"><br>
-        <input type="text" name="fechaFin" placeholder="Ingresar la fecha de fin"><br>
+        <input type="text" id="campofechainicio" name="fechaInicio" placeholder="Ingresar la fecha de inicio"><br>
+        <input type="text" id="campofechafin" name="fechaFin" placeholder="Ingresar la fecha de fin"><br>
         <input type="submit" value="Agregar">
     </form>
+    <script>
+    //var dateString = document.getElementById("campofechainicio").value; 
+
+    //var dateObject = new Date(dateString);
+    
+    //document.campofechainicio.innerHTML = dateObject.toString();
+    </script>
     </main>
+
     EOT;
 
+
     if(array_key_exists('peso',$_POST)){
-        agregarDatos3();
+        agregarCosecha();
         /*echo '<script>alert("Datos guardados...");</script>';*/
         echo "<script>location.href='cosechas.php'</script>";
     }
@@ -159,7 +210,7 @@ function agregarDatosMateriaPrimaCosecha(){
     $cantidad = $_POST["cantidad"];
     $precioU = $_POST["precioUnitario"];
     $sql = "";
-    $total = $cantidad * $precioU;
+    $total = (int)$cantidad * (float)$precioU;
     date_default_timezone_set('America/Bogota');
     $fechaActual = date('Y-m-d');
    
@@ -215,6 +266,17 @@ function agregarCosecha(){
     
     $sql = "INSERT INTO cosecha (peso, fecha, fechaFin, Empresa_idEmpresa) VALUES ('$peso', '$fechaI', '$fechaF', 1)";
     $miconexion->consulta($sql);  
+
+    $sql = "SELECT MAX(idcosecha) FROM cosecha";
+    $miconexion->consulta($sql);
+    $row = $miconexion->consultaListaPrueba($sql);
+    $row = $row[0];
+
+    $sql = "INSERT INTO fase (nombre_fase, cosecha_idcosecha) VALUES ('cria', '$row')";
+    $miconexion->consulta($sql);
+
+    $sql = "INSERT INTO fase (nombre_fase, cosecha_idcosecha) VALUES ('engorde', '$row')";
+    $miconexion->consulta($sql);
 }
 
 include("piePagina.php");

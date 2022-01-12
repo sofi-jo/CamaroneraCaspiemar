@@ -5,10 +5,10 @@ include("../dll/class_mysqli.php");
 
 	<main class="content">
 
-		<h1>Trabajadores Temporales</h2>
+		<h1>Trabajadores</h2>
 		
 		<form class ="formulario" method="post" action="agregTrabajadorTemp.php">
-            //Trabajador temporal
+         
 			<input type="text" name="cedula" placeholder="Ingresar Cedula"><br>
 			<input type="text" name="tipo" placeholder="Ingresar Tipo Oficio"><br>
 			<input type="text" name="catidad_horas" placeholder="Ingresar Horas"><br>
