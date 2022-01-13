@@ -92,9 +92,9 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
         /*echo '<script>alert("Datos guardados...");</script>';*/
         if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
-            //echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
         }else{
-            //echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
         }
     }
 }elseif($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'or $urlFrom == $ruta.'registroCostoIndirecto.php?fase=2'){
