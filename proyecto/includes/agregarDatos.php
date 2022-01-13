@@ -90,7 +90,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     if(array_key_exists('cantidad',$_POST)){
         agregarDatosMateriaPrimaCosecha();
 
-        /*echo '<script>alert("Datos guardados...");</script>';*/
+       
         if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
             echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
         }else{
@@ -232,9 +232,11 @@ function agregarDatosMateriaPrimaCosecha(){
 
     //la fase debe ser una de las que se encuentra en la bse 
     if ($urlFrom == $ruta.'materiaPrimaCosecha.php?fase=1'){
+        echo '<script>alert("Datos guardados...");</script>';
         $sql = "insert into registromateriaprima values('', '$rowidCosecha[0]')";
     }else{
-        $sql = "insert into registromateriaprima values('', '$rowidCosecha[0]')";
+        echo '<script>alert("Datos guardados...");</script>';
+        $sql = "insert into registromateriaprima values('', '$rowidCosecha[1]')";
     }
     $miconexion->consulta($sql);
 
@@ -245,7 +247,7 @@ function agregarDatosMateriaPrimaCosecha(){
 
 
 
-    $sql = "INSERT INTO registromateriaprima_has_materiaprima VALUES('','$rowmaxidRegistroMP', '$idmp', '$fecha', '$cantidad', '$precioU', '$total')";
+    $sql = "INSERT INTO registromateriaprima_has_materiaprima VALUES('', '$idmp', '$rowmaxidRegistroMP', '$fecha', '$cantidad', '$precioU', '$total')";
     $miconexion->consulta($sql);
 }
 
