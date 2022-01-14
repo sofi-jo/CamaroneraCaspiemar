@@ -27,3 +27,4 @@
         <li><a id='crudDB' href="<?php echo $urlSitio; ?>includes/crudDB.php">Gestionar Base de datos</a></li>
       </ul>
     </nav>
+    <a class = "atras "href="javascript:history.back()"><img src="../images/atras.png" alt=""></a>
