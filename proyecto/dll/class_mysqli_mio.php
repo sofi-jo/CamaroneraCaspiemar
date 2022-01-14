@@ -235,7 +235,7 @@ class clase_mysqli7
 
 	function consultaListaMateriaPrima(){
 		echo <<< EOT
-		<input type="search" name="busquedacostoIndirecto" placeholder = "Materia Prima" list="listamodelos"><br>
+		<input type="search" id="inputlist" name="busquedacostoIndirecto" placeholder = "Materia Prima" list="listamodelos"><br>
 		<datalist id="listamodelos">
 		EOT;
 
@@ -243,7 +243,6 @@ class clase_mysqli7
 			echo '<option value=' . $row[1] . ' oldvalue='. $row[0] . ">";
 		}
 		echo '</datalist>';
-
 	}
 
 	function consultaListaCostosIndirectos(){
