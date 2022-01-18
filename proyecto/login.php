@@ -1,6 +1,6 @@
 <?php
     require_once("dll/connection.php");
-    include("includes/cabecera.php");
+  
     session_start();
 
     if(isset($_POST["login"])){
@@ -56,6 +56,6 @@
     </form>
     </div>
     </div>
-    <?php include("includes/piePagina.php")?>
+
     <?php if (!empty($message)) {echo "<p class=\"error\">"."MESSAGE: ".$message . "</p>";} ?>
     

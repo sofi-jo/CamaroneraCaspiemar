@@ -1,6 +1,6 @@
 <?php
 require_once("dll/connection.php");
-include("includes/cabecera.php");
+
 session_start();
 
 if (isset($_POST["register"])) {
@@ -76,4 +76,3 @@ if (!empty($_POST['fullname'])&&!empty($_POST['email'])&&!empty($_POST['username
         </form>
     </div>
 </div>
-<?php include("includes/piePagina.php")?>
