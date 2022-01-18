@@ -16,9 +16,9 @@ class clase_mysqli7
 	var $Conexion_ID = 0;
 	var $Consulta_ID = 0;
 
-//no se le encuentra utilidad por el momento
+	//no se le encuentra utilidad por el momento
 
-/*
+	/*
 	public function __construct($host = "", $user = "", $pass = "", $db = "")
 	{
 		$this->BaseDatos = $db;
@@ -114,7 +114,7 @@ class clase_mysqli7
 		echo "</table>";
 	}
 
-	
+
 
 	//Retorna una lista de la consulta - 1 fila
 	function consultaLista()
@@ -127,13 +127,40 @@ class clase_mysqli7
 		}
 	}
 
+	/* 	function consultaListaMequierom()
+	{
+		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
+			for ($i = 0; $i < $this->numcampos(); $i++) {
+				global $anotherArrayGa = $row[$i];
+			}
+			return $row;
+		}
+	} */
+
+
+	function consultaListaGaa()
+	{
+		$anotherrow = array();
+		while ($row = mysqli_fetch_array($this->Consulta_ID, MYSQLI_NUM)) {
+			array_push($anotherrow, $row[0]);
+		}
+		return $anotherrow;
+	}
+
+
 	function consultaListaPrueba()
 	{
 		$row = mysqli_fetch_array($this->Consulta_ID);
 		return $row;
 	}
 
-/*     function consultaListaPrueba2()	
+	function consultaListaPruebaGaa()
+	{
+		$row =  mysqli_fetch_assoc($this->Consulta_ID);
+		return $row;
+	}
+
+	/*     function consultaListaPrueba2()	
     {
         echo $this->numregistros();
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
@@ -145,17 +172,17 @@ class clase_mysqli7
         return $anotherArray;
 	} */
 
-    function consultaListaPrueba2()	
-    {
-        //echo $this->numregistros();
+	function consultaListaPrueba2()
+	{
+		//echo $this->numregistros();
 		for ($i = 0; $i < $this->numregistros(); $i++) {
-            $row = mysqli_fetch_array($this->Consulta_ID);
+			$row = mysqli_fetch_array($this->Consulta_ID);
 			$anotherArray[$i] = array($row[0], $row[1]);
 		}
-        return $anotherArray;
+		return $anotherArray;
 	}
 
-    function consultaLista3()
+	function consultaLista3()
 	{
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			for ($i = 0; $i < $this->numcampos(); $i++) {
@@ -166,8 +193,8 @@ class clase_mysqli7
 	}
 
 
- 
-/* function consultaListaPrueba2()	
+
+	/* function consultaListaPrueba2()	
 {
     //echo $this->numregistros();
     while ($row = mysqli_fetch_array($this->Consulta_ID)) {
@@ -208,7 +235,7 @@ class clase_mysqli7
 		}
 		echo "<td>Editar</td>";
 		echo "</thead>";
-		
+
 		echo "</tr>";
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
@@ -233,19 +260,21 @@ class clase_mysqli7
 	}
 
 
-	function consultaListaMateriaPrima(){
+	function consultaListaMateriaPrima()
+	{
 		echo <<< EOT
 		<input type="search" id="inputlist" name="busquedacostoIndirecto" placeholder = "Materia Prima" list="listamodelos"><br>
 		<datalist id="listamodelos">
 		EOT;
 
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-			echo '<option value=' . $row[1] . ' oldvalue='. $row[0] . ">";
+			echo '<option value=' . $row[1] . ' oldvalue=' . $row[0] . ">";
 		}
 		echo '</datalist>';
 	}
 
-	function consultaListaCostosIndirectos(){
+	function consultaListaCostosIndirectos()
+	{
 		echo <<< EOT
 		<input type="search" name="busquedacostoIndirecto" placeholder = "Materia Prima" list="listamodelos"><br>
 		<datalist id="listamodelos">
@@ -256,5 +285,4 @@ class clase_mysqli7
 		}
 		echo '</datalist>';
 	}
-
 }
