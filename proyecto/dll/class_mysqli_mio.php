@@ -238,7 +238,7 @@ class clase_mysqli7
 		
 		EOT;
 
-		echo "<table id='tablita' class = 'tabla'>";
+		echo "<table id='tablita'>";
 		echo "<thead>";
 		echo "<tr>";
 		for ($i = 1; $i < $this->numcampos(); $i++) {
@@ -247,7 +247,7 @@ class clase_mysqli7
 		echo "<th>Editar</th>";
 		echo "</tr>";
 		echo "</thead>";
-		echo "<body>";
+		echo "<tbody>";
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
 			for ($i = 1; $i < $this->numcampos(); $i++) {
@@ -267,6 +267,7 @@ class clase_mysqli7
 				</form>
 			</td>
 			</tr>
+			echo "</tbody>";
 			EOT;
 		}
 		echo "</table>";
@@ -281,7 +282,7 @@ class clase_mysqli7
 		EOT;
 
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-			echo '<option value=' . $row[1] . ' oldvalue=' . $row[0] . ">";
+			echo '<option value=' . "$row[1]" . ' oldvalue=' . $row[0] . ">";
 		}
 		echo '</datalist>';
 	}

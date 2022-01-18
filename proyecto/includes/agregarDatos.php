@@ -209,7 +209,6 @@ function agregarDatosMateriaPrima(){
 
 function agregarDatosMateriaPrimaCosecha(){
     global $idmp;
-    echo $idmp;
     global $miconexion;
     global $urlFrom;
     global $ruta;
