@@ -93,16 +93,26 @@ class clase_mysqli7
 		echo "</table>";
 	}
 
-	function verconsultaenlace()
-	{
-		echo "<table class ='tabla'>";
-		echo "<tr>";
+	function verconsultaenlace(){
+		echo <<< EOT
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+		<script>
+			$(document).ready( function () {
+				$('#tabla').DataTable();
+			} );
+		</script>
+		EOT;
+		echo "<table id ='tabla'class='display' style='width:100%'>";
 		echo "<thead>";
+		echo "<tr>";
 		for ($i = 1; $i < $this->numcampos(); $i++) {
-			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
+			echo "<th>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</th>";
 		}
-		echo "<thead/>";
+		echo "<th>Editar</th>";
 		echo "</tr>";
+		echo "</thead>";
+		echo "<tbody>";
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
 			for ($i = 1; $i < $this->numcampos(); $i++) {
@@ -111,6 +121,7 @@ class clase_mysqli7
 			echo "<td><a href='crudCosechas.php?idRegistro=$row[0]'>Visualizar</a></td>";
 			echo "</tr>";
 		}
+		echo "</tbody>";
 		echo "</table>";
 	}
 
@@ -126,16 +137,6 @@ class clase_mysqli7
 			return $row;
 		}
 	}
-
-	/* 	function consultaListaMequierom()
-	{
-		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-			for ($i = 0; $i < $this->numcampos(); $i++) {
-				global $anotherArrayGa = $row[$i];
-			}
-			return $row;
-		}
-	} */
 
 
 	function consultaListaGaa()
@@ -160,17 +161,6 @@ class clase_mysqli7
 		return $row;
 	}
 
-	/*     function consultaListaPrueba2()	
-    {
-        echo $this->numregistros();
-		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-			for ($i = 0; $i < $this->numregistros(); $i++) {
-				$anotherArray[$i] = array(mysqli_fetch_array($this->Consulta_ID));
-			}
-		}
-        echo $anotherArray[0][0];
-        return $anotherArray;
-	} */
 
 	function consultaListaPrueba2()
 	{
@@ -191,16 +181,6 @@ class clase_mysqli7
 			return $row;
 		}
 	}
-
-
-
-	/* function consultaListaPrueba2()	
-{
-    //echo $this->numregistros();
-    while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-        echo $row[1] . "    0000000   ";
-    }
-} */
 
 	//presenta la tabla de la consulta con el CRUD
 	function verconsulta2()
@@ -228,17 +208,17 @@ class clase_mysqli7
 	function verconsulta3()
 	{
 		echo <<< EOT
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 		<script>
 			$(document).ready( function () {
-				$('#tablita').DataTable();
+				$('#tabla').DataTable();
 			} );
 		</script>
 		
 		EOT;
 
-		echo "<table id='tablita' class = 'tabla'>";
+		echo "<table id='tabla' class='display' style='width:100%'>";
 		echo "<thead>";
 		echo "<tr>";
 		for ($i = 1; $i < $this->numcampos(); $i++) {
@@ -247,14 +227,13 @@ class clase_mysqli7
 		echo "<th>Editar</th>";
 		echo "</tr>";
 		echo "</thead>";
-		echo "<body>";
+		echo "<tbody>";
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
 			for ($i = 1; $i < $this->numcampos(); $i++) {
 				echo "<td>" . $row[$i] . "</td>";
 			}
 			$link = $_SERVER['REQUEST_URI'];
-			
 			
 			echo <<< EOT
 			<td>
@@ -269,6 +248,7 @@ class clase_mysqli7
 			</tr>
 			EOT;
 		}
+		echo "</tbody>";
 		echo "</table>";
 	}
 
