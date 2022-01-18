@@ -11,6 +11,7 @@ include("../dll/class_mysqli.php");
             <input type="text" name="nombre" placeholder="Ingresar nombre costo"><br>
             <input type="text" name="tipo" placeholder="Ingresar tipo costo"><br>
 			<input type="submit" value="Agregar">
+			<a class= 'cancelar' href='http://127.0.0.1/CamaroneraCaspiemar/proyecto/includes/costosIndirectos.php'>Cancelar</a>
 		</form>
 		
 	</main>

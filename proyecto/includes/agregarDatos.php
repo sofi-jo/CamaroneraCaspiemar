@@ -4,7 +4,7 @@ include("cabeceraInterna.php");
 extract($_POST);
 extract($_GET);
 
-$miconexion= new clase_mysqli7;
+$miconexion = new clase_mysqli7;
 $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
 
@@ -18,9 +18,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
         <input type="text" name="nombre" placeholder="Ingrese nombre de producto"><br>
         <input type="text" name="descripcionNuevo" placeholder="Ingresar descripcion"><br>
         <input type="submit" value="Agregar">
-        <input type="cancel" onclick="javascript:window.location='$urlSitio/includes/gestionarBDmateriaPrima.php';"
-        value="Cancelar">
-    </form>
+        <a class= 'cancelar' href='http://127.0.0.1/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'>Cancelar</a>
 
     </main>
     EOT;
@@ -64,8 +62,8 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
         <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
         <input type="text" name="precioUnitario" placeholder="Ingresar precio unitario"><br>
         <input type="submit" value="Agregar">
+        <a class= 'cancelar' href='http://127.0.0.1/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'>Cancelar</a>
     </form>
-
     </main>
     
     EOT;
@@ -111,6 +109,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     echo <<< EOT
         <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
         <input type="submit" value="Agregar">
+        <a class= 'cancelar' href='http://127.0.0.1/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'>Cancelar</a>
     </form>
 
     </main>
