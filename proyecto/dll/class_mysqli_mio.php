@@ -227,31 +227,44 @@ class clase_mysqli7
 
 	function verconsulta3()
 	{
-		echo "<table class = 'tabla'>";
+		echo <<< EOT
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+		<script>
+			$(document).ready( function () {
+				$('#tablita').DataTable();
+			} );
+		</script>
+		
+		EOT;
+
+		echo "<table id='tablita' class = 'tabla'>";
 		echo "<thead>";
 		echo "<tr>";
 		for ($i = 1; $i < $this->numcampos(); $i++) {
-			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
+			echo "<th>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</th>";
 		}
-		echo "<td>Editar</td>";
-		echo "</thead>";
-
+		echo "<th>Editar</th>";
 		echo "</tr>";
+		echo "</thead>";
+		echo "<body>";
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
 			for ($i = 1; $i < $this->numcampos(); $i++) {
 				echo "<td>" . $row[$i] . "</td>";
 			}
 			$link = $_SERVER['REQUEST_URI'];
+			
+			
 			echo <<< EOT
 			<td>
-			<form action="editarDatos.php">
-			<select name="tipoEdit" onchange="location = this.value;">
-			<option>...</option>
-			<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Actualizar&idRegistro=$row[0]">Actualizar</option>
-			<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Eliminar&idRegistro=$row[0]">Eliminar</option>
-			</select>
-			</form>
+				<form action="editarDatos.php">
+					<select name="tipoEdit" onchange="location = this.value;">
+						<option>...</option>
+						<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Actualizar&idRegistro=$row[0]">Actualizar</option>
+						<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Eliminar&idRegistro=$row[0]">Eliminar</option>
+					</select>
+				</form>
 			</td>
 			</tr>
 			EOT;

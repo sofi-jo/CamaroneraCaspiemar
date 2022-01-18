@@ -90,9 +90,9 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
        
         if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
-            #echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
         }else{
-            #echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
         }
     }
 }elseif($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'or $urlFrom == $ruta.'registroCostoIndirecto.php?fase=2'){
@@ -224,7 +224,6 @@ function agregarDatosMateriaPrimaCosecha(){
     $sql = "SELECT idFase FROM fase WHERE cosecha_idcosecha = '$idCosecha'";
     $miconexion->consulta($sql);
     $rowidCosecha = $miconexion->consultaListaGaa();
-    
     #date_default_timezone_set('America/Bogota');
     #$fechaActual = date('Y-m-d');
    
@@ -232,9 +231,7 @@ function agregarDatosMateriaPrimaCosecha(){
     //la fase debe ser una de las que se encuentra en la bse 
     if ($urlFrom == $ruta.'materiaPrimaCosecha.php?fase=1'){
         $sql = "insert into registromateriaprima values('', '$rowidCosecha[0]')";
-        echo '<script>alert("Datos guardados...");</script>';
     }else{
-        echo '<script>alert("Datos guardados...2");</script>';
         $sql = "insert into registromateriaprima values('', '$rowidCosecha[1]')";
     }
     $miconexion->consulta($sql);
