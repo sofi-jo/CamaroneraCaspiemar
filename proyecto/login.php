@@ -35,6 +35,7 @@
 ?>
     <div class="container mlogin">
         <div id="login">
+        <link rel="stylesheet" type="text/css" href="<?php echo $urlSitio;?>styles/stylelog.css">
     <h1>Autenticación de Usuario</h1>
     <form name="loginform" id="loginform" action="" method="POST">
             <p>
