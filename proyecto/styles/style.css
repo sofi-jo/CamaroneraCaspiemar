@@ -169,25 +169,22 @@ input[type=select] {
     font-weight: bold;
 }
 
-.tabla {
+#tabla {
     width: 100%;
-    text-align: left;
-    border-collapse: collapse;
-    margin: 0 0 1em 0;
-    caption-side: top;
+    text-align: center;
 }
-
+/* 
 .tabla thead{
     border-bottom: 2px solid #000;
     border-top: 2px solid #000;
 }
 
-th, td {
+/* th, td {
     width: 25%;
     text-align: center;
     padding: 0.5em;
     border-bottom: 1px solid #000;
-}
+} */
 
 
 nav h3{

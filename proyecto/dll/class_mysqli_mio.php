@@ -16,9 +16,9 @@ class clase_mysqli7
 	var $Conexion_ID = 0;
 	var $Consulta_ID = 0;
 
-//no se le encuentra utilidad por el momento
+	//no se le encuentra utilidad por el momento
 
-/*
+	/*
 	public function __construct($host = "", $user = "", $pass = "", $db = "")
 	{
 		$this->BaseDatos = $db;
@@ -93,16 +93,26 @@ class clase_mysqli7
 		echo "</table>";
 	}
 
-	function verconsultaenlace()
-	{
-		echo "<table class ='tabla'>";
-		echo "<tr>";
+	function verconsultaenlace(){
+		echo <<< EOT
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+		<script>
+			$(document).ready( function () {
+				$('#tabla').DataTable();
+			} );
+		</script>
+		EOT;
+		echo "<table id ='tabla'class='display' style='width:100%'>";
 		echo "<thead>";
+		echo "<tr>";
 		for ($i = 1; $i < $this->numcampos(); $i++) {
-			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
+			echo "<th>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</th>";
 		}
-		echo "<thead/>";
+		echo "<th>Editar</th>";
 		echo "</tr>";
+		echo "</thead>";
+		echo "<tbody>";
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
 			for ($i = 1; $i < $this->numcampos(); $i++) {
@@ -111,10 +121,11 @@ class clase_mysqli7
 			echo "<td><a href='crudCosechas.php?idRegistro=$row[0]'>Visualizar</a></td>";
 			echo "</tr>";
 		}
+		echo "</tbody>";
 		echo "</table>";
 	}
 
-	
+
 
 	//Retorna una lista de la consulta - 1 fila
 	function consultaLista()
@@ -127,35 +138,41 @@ class clase_mysqli7
 		}
 	}
 
+
+	function consultaListaGaa()
+	{
+		$anotherrow = array();
+		while ($row = mysqli_fetch_array($this->Consulta_ID, MYSQLI_NUM)) {
+			array_push($anotherrow, $row[0]);
+		}
+		return $anotherrow;
+	}
+
+
 	function consultaListaPrueba()
 	{
 		$row = mysqli_fetch_array($this->Consulta_ID);
 		return $row;
 	}
 
-/*     function consultaListaPrueba2()	
-    {
-        echo $this->numregistros();
-		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-			for ($i = 0; $i < $this->numregistros(); $i++) {
-				$anotherArray[$i] = array(mysqli_fetch_array($this->Consulta_ID));
-			}
-		}
-        echo $anotherArray[0][0];
-        return $anotherArray;
-	} */
-
-    function consultaListaPrueba2()	
-    {
-        //echo $this->numregistros();
-		for ($i = 0; $i < $this->numregistros(); $i++) {
-            $row = mysqli_fetch_array($this->Consulta_ID);
-			$anotherArray[$i] = array($row[0], $row[1]);
-		}
-        return $anotherArray;
+	function consultaListaPruebaGaa()
+	{
+		$row =  mysqli_fetch_assoc($this->Consulta_ID);
+		return $row;
 	}
 
-    function consultaLista3()
+
+	function consultaListaPrueba2()
+	{
+		//echo $this->numregistros();
+		for ($i = 0; $i < $this->numregistros(); $i++) {
+			$row = mysqli_fetch_array($this->Consulta_ID);
+			$anotherArray[$i] = array($row[0], $row[1]);
+		}
+		return $anotherArray;
+	}
+
+	function consultaLista3()
 	{
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			for ($i = 0; $i < $this->numcampos(); $i++) {
@@ -164,16 +181,6 @@ class clase_mysqli7
 			return $row;
 		}
 	}
-
-
- 
-/* function consultaListaPrueba2()	
-{
-    //echo $this->numregistros();
-    while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-        echo $row[1] . "    0000000   ";
-    }
-} */
 
 	//presenta la tabla de la consulta con el CRUD
 	function verconsulta2()
@@ -200,52 +207,68 @@ class clase_mysqli7
 
 	function verconsulta3()
 	{
-		echo "<table class = 'tabla'>";
+		echo <<< EOT
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+		<script>
+			$(document).ready( function () {
+				$('#tabla').DataTable();
+			} );
+		</script>
+		
+		EOT;
+
+		echo "<table id='tabla' class='display' style='width:100%'>";
 		echo "<thead>";
 		echo "<tr>";
 		for ($i = 1; $i < $this->numcampos(); $i++) {
-			echo "<td>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</td>";
+			echo "<th>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</th>";
 		}
-		echo "<td>Editar</td>";
-		echo "</thead>";
-		
+		echo "<th>Editar</th>";
 		echo "</tr>";
+		echo "</thead>";
+		echo "<tbody>";
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
 			echo "<tr>";
 			for ($i = 1; $i < $this->numcampos(); $i++) {
 				echo "<td>" . $row[$i] . "</td>";
 			}
 			$link = $_SERVER['REQUEST_URI'];
+			
 			echo <<< EOT
 			<td>
-			<form action="editarDatos.php">
-			<select name="tipoEdit" onchange="location = this.value;">
-			<option>...</option>
-			<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Actualizar&idRegistro=$row[0]">Actualizar</option>
-			<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Eliminar&idRegistro=$row[0]">Eliminar</option>
-			</select>
-			</form>
+				<form action="editarDatos.php">
+					<select name="tipoEdit" onchange="location = this.value;">
+						<option>...</option>
+						<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Actualizar&idRegistro=$row[0]">Actualizar</option>
+						<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Eliminar&idRegistro=$row[0]">Eliminar</option>
+					</select>
+				</form>
 			</td>
 			</tr>
+			echo "</tbody>";
 			EOT;
 		}
+		echo "</tbody>";
 		echo "</table>";
 	}
 
 
-	function consultaListaMateriaPrima(){
+	function consultaListaMateriaPrima()
+	{
 		echo <<< EOT
 		<input type="search" id="inputlist" name="busquedacostoIndirecto" placeholder = "Materia Prima" list="listamodelos"><br>
 		<datalist id="listamodelos">
 		EOT;
 
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-			echo '<option value=' . $row[1] . ' oldvalue='. $row[0] . ">";
+			echo "<option value='$row[1]' oldvalue='$row[0]'>";
 		}
 		echo '</datalist>';
 	}
 
-	function consultaListaCostosIndirectos(){
+	function consultaListaCostosIndirectos()
+	{
 		echo <<< EOT
 		<input type="search" name="busquedacostoIndirecto" placeholder = "Materia Prima" list="listamodelos"><br>
 		<datalist id="listamodelos">
@@ -256,5 +279,4 @@ class clase_mysqli7
 		}
 		echo '</datalist>';
 	}
-
 }
