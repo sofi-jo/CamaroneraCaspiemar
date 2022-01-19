@@ -22,9 +22,9 @@
         </script>
 		<form class ="formulario_reporte" method="post" action="aggCostosIndirecDb.php">
             <label for="fecha_inicio">Fecha Inicio: </label>
-            <input type="text" id="campofechainicio" name="fecha_inicio" placeholder="" ><br>
+            <input type="select" id="campofechainicio" name="fecha_inicio" placeholder="" ><br>
             <label for="fecha_fin">Fecha Fin: </label>
-            <input type="text" id="campofechafin" name="fecha_fin"><br>
+            <input type="select" id="campofechafin" name="fecha_fin"><br>
             <label for="filtrar">Filtrar por: </label>
             <!-- <input type="select" name="filtrar"><br> -->
             <select  classs="filtro" name="select">
