@@ -33,3 +33,10 @@ FROM registrocostosindirectos_has_costosindirectos;
 
 SELECT *
 FROM registromateriaprima;
+
+
+
+SELECT *
+FROM arealaboral_has_registro_mano_obre ro, registrocostosindirectos_has_costosindirectos ri, registromateriaprima_has_materiaprima rm
+WHERE fecha BETWEEN "2021-01-01" AND "2021-01-30";
+
