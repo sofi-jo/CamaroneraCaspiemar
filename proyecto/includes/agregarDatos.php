@@ -54,10 +54,11 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
     $sql = "select idmateriaprima,nombre from materiaprima";
     $miconexion->consulta($sql);
+    
     $miconexion->consultaListaMateriaPrima();
 
     echo <<< EOT
-        <input type="hidden" id=idmp name=idmp value=0>
+        <input type="hidden" id=idmp name=idmp value="1">
         <input type="text" id="campofechainicio" name="fecha" placeholder="Ingresar fecha"><br>
         <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
         <input type="text" name="precioUnitario" placeholder="Ingresar precio unitario"><br>
@@ -70,10 +71,13 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
 	echo <<< EOT
     <script>
+
+    
     $(document).ready(function() {
         $('#inputlist').on('input', function() {
-            var inputval= $("#inputlist").val();
-            var oldval= $('datalist option[value='+inputval+']').attr('oldvalue');
+            var inputval= $('#inputlist').val();
+            var oldval= $("datalist option[value='"+inputval+"']").attr('oldvalue');
+            console.log(oldval);
             if (oldval){
                 var myidmp = document.forms['myformmp']['idmp'];
                 myidmp.setAttribute('value', oldval);
@@ -83,16 +87,14 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     </script>
     EOT;
 
-
-
     if(array_key_exists('cantidad',$_POST)){
         agregarDatosMateriaPrimaCosecha();
 
        
         if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
-            echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
+            #echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
         }else{
-            echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
+            #echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
         }
     }
 }elseif($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'or $urlFrom == $ruta.'registroCostoIndirecto.php?fase=2'){
@@ -239,6 +241,8 @@ function agregarDatosMateriaPrimaCosecha(){
     $miconexion->consulta($sql);
     $rowmaxidRegistroMP = $miconexion->consultaListaPrueba();
     $rowmaxidRegistroMP = $rowmaxidRegistroMP[0];
+
+    echo $idmp;
 
 
 
