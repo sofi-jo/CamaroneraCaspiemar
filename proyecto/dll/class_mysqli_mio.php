@@ -246,7 +246,7 @@ class clase_mysqli7
 				</form>
 			</td>
 			</tr>
-			echo "</tbody>";
+			</tbody>
 			EOT;
 		}
 		echo "</tbody>";
