@@ -3,7 +3,7 @@
     include("../dll/class_mysqli_mio.php");
 
 
-
+    echo '<main>';
     echo '<h2 class = "titulo">Gestionar Costos Indirectos</h2>';
     echo '<div class = "agregar"><a href="' . $urlSitio . 'includes/formCostosIndirectos.php">Agregar +</a></div>';
 

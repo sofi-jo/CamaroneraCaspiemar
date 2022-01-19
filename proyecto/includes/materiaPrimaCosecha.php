@@ -17,15 +17,9 @@ $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
 
 if ($fase == 1) {
-/*     $sql = "SELECT idRegistroMateriaPrima, m.nombre'Nombre', fecha'FECHA', cantidad'Cantidad', costoUnitario'Costo Unitario',
-        Total'Total' 
-        FROM registromateriaprima rm
-        INNER JOIN registromateriaprima_has_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
-        INNER JOIN materiaprima m ON m.idmateriaprima  = r.materiaPrima_idmateriaPrima
-        WHERE rm.fase_idFase = 1;"; */
 
     $sql = "SELECT idRegistroMateriaPrima, m.nombre'Nombre', fecha'FECHA', cantidad'Cantidad', costoUnitario'Costo Unitario',
-    Total'Total' 
+    totatl'Total' 
     FROM registromateriaprima rm
     INNER JOIN registromateriaprima_has_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
     INNER JOIN materiaprima m ON m.idmateriaprima  = r.materiaPrima_idmateriaPrima

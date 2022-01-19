@@ -246,6 +246,7 @@ class clase_mysqli7
 				</form>
 			</td>
 			</tr>
+			</tbody>
 			EOT;
 		}
 		echo "</tbody>";
@@ -261,7 +262,7 @@ class clase_mysqli7
 		EOT;
 
 		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
-			echo '<option value=' . $row[1] . ' oldvalue=' . $row[0] . ">";
+			echo "<option value='$row[1]' oldvalue='$row[0]'>";
 		}
 		echo '</datalist>';
 	}

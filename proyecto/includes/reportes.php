@@ -4,12 +4,27 @@
 ?>
     <main class="content">
 		<h2 class ="titulo">Generar Reporte</h2>
-		
-		<form class ="formulario_reporte" method="post" action="reportes.php">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+              $( "#campofechainicio" ).datepicker({
+                numberOfMonths: 1,
+              });
+              $( "#campofechafin" ).datepicker({
+                numberOfMonths: 1,
+              });
+          
+              $( "#campofechainicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+              $( "#campofechafin" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+            });
+        </script>
+		<form class ="formulario_reporte" method="post" action="aggCostosIndirecDb.php">
             <label for="fecha_inicio">Fecha Inicio: </label>
-            <input type="select" name="fecha_inicio" placeholder="AAAA/MM/DD" ><br>
-            <label for="fecha_fin">Fecha Fin:</label>
-            <input type="select" name="fecha_fin" placeholder="AAAA/MM/DD"><br>
+            <input type="select" id="campofechainicio" name="fecha_inicio" placeholder="" ><br>
+            <label for="fecha_fin">Fecha Fin: </label>
+            <input type="select" id="campofechafin" name="fecha_fin"><br>
             <label for="filtrar">Filtrar por: </label>
             <select class="filtro" name="select">
                 <option value="1"selected>Todos</option>

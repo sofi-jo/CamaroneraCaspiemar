@@ -22,12 +22,19 @@ SELECT *
 FROM registrocostosindirectos;
 
 
-SELECT rc.idregistroCostosIndirectos, c.nombre, rc.fecha'Fecha', rc.totalCostoIndirecto'Total'
+SELECT rc.idregistroCostosIndirectos, c.nombre, r.fecha'Fecha', r.totalCostoIndirecto'Total'
 FROM registrocostosindirectos rc
 INNER JOIN registrocostosindirectos_has_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
 INNER JOIN costosindirectos c ON c.idcostosIndirectos = r.costosIndirectos_idcostosIndirectos
-WHERE rc.fase_idFase = 1;
+WHERE ( rm.Fase_idFase % 2 ) != 0;
 
+SELECT idRegistroMateriaPrima, m.nombre'Nombre', fecha'FECHA', cantidad'Cantidad', costoUnitario'Costo Unitario',
+    totatl'Total' 
+    FROM registromateriaprima rm
+    INNER JOIN registromateriaprima_has_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
+    INNER JOIN materiaprima m ON m.idmateriaprima  = r.materiaPrima_idmateriaPrima
+    WHERE ( rm.Fase_idFase % 2 ) != 0;
+    
 SELECT *
 FROM registrocostosindirectos_has_costosindirectos;
 
@@ -35,8 +42,12 @@ SELECT *
 FROM registromateriaprima;
 
 
-
 SELECT *
-FROM arealaboral_has_registro_mano_obre ro, registrocostosindirectos_has_costosindirectos ri, registromateriaprima_has_materiaprima rm
-WHERE fecha BETWEEN "2021-01-01" AND "2021-01-30";
+FROM arealaboral_has_registro_mano_obre, registrocostosindirectos_has_costosindirectos , registromateriaprima_has_materiaprima rm
+WHERE rm.fecha BETWEEN "2022-01-01" AND "2022-01-30";
+
+SELECT m.nombre
+FROM registromateriaprima_has_materiaprima as rm
+INNER JOIN materiaprima m ON m.idmateriaprima  = rm.materiaPrima_idmateriaPrima
+WHERE rm.fecha BETWEEN "2022-01-01" AND "2022-01-30";
 
