@@ -58,7 +58,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     $miconexion->consultaListaMateriaPrima();
 
     echo <<< EOT
-        <input type="hidden" id=idmp name=idmp value="1">
+        <input type="hidden" id=idmp name=idmp value="">
         <input type="text" id="campofechainicio" name="fecha" placeholder="Ingresar fecha"><br>
         <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
         <input type="text" name="precioUnitario" placeholder="Ingresar precio unitario"><br>
@@ -72,7 +72,6 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 	echo <<< EOT
     <script>
 
-    
     $(document).ready(function() {
         $('#inputlist').on('input', function() {
             var inputval= $('#inputlist').val();
@@ -97,19 +96,37 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
             echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
         }
     }
+
 }elseif($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'or $urlFrom == $ruta.'registroCostoIndirecto.php?fase=2'){
     echo <<< EOT
     <main class="content">
     <h2 class ="titulo">Agregar Costos Indirectos</h2>
-    <form class ="formulario" method="post">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <form name="myformci" class ="formulario" method="post">
+
+    <script>
+    $( function() {
+      $( "#campofechainicio" ).datepicker({
+        numberOfMonths: 1,
+      });
+      $( "#campofechainicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    } );
+    </script>
+
     EOT;
 
     $sql = "select idcostosIndirectos, nombre from costosindirectos";
     $miconexion->consulta($sql);
-    $miconexion->consultaListaMateriaPrima();
+    $miconexion->consultaListaCostosIndirectos();
 
     echo <<< EOT
-        <input type="text" name="cantidad" placeholder="Ingresar cantidad"><br>
+        <input type="hidden" id=idci name=idci value="">
+        <input type="text" id="campofechainicio" name="fecha" placeholder="Ingresar fecha"><br>
+        <input type="text" name="cantidadP" placeholder="Ingresar cantidad pagada"><br>
         <input type="submit" value="Agregar">
         <a class= 'cancelar' href='http://127.0.0.1/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'>Cancelar</a>
     </form>
@@ -117,7 +134,25 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     </main>
     EOT;
 
-    if(array_key_exists('cantidad',$_POST)){
+    echo <<< EOT
+    <script>
+
+    
+    $(document).ready(function() {
+        $('#inputlist').on('input', function() {
+            var inputval= $('#inputlist').val();
+            var oldval= $("datalist option[value='"+inputval+"']").attr('oldvalue');
+            console.log(oldval);
+            if (oldval){
+                var myidci = document.forms['myformci']['idci'];
+                myidci.setAttribute('value', oldval);
+            }
+        })
+    });
+    </script>
+    EOT;
+
+    if(array_key_exists('cantidadP',$_POST)){
         agregarDatosCostosIndirectosCosecha();
 
         /*echo '<script>alert("Datos guardados...");</script>';*/
@@ -143,7 +178,6 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
       $( "#campofechainicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
       $( "#campofechafin" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-      //var date = $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
     } );
     </script>
     
@@ -251,20 +285,37 @@ function agregarDatosMateriaPrimaCosecha(){
 }
 
 function agregarDatosCostosIndirectosCosecha(){
+    global $idci;
     global $miconexion;
     global $urlFrom;
     global $ruta;
-    $idMateria = $_POST[""];
-    echo $idMateria;
-    $cantidad = $_POST["cantidad"];
+    global $fecha;
+    global $idCosecha;
+    $cantidad = $_POST["cantidadP"];
     $sql = "";
-    date_default_timezone_set('America/Bogota');
-    $fechaActual = date('Y-m-d');
+
+
+    $sql = "SELECT idFase FROM fase WHERE cosecha_idcosecha = '$idCosecha'";
+    $miconexion->consulta($sql);
+    $rowidCosecha = $miconexion->consultaListaGaa();
+
+    echo $rowidCosecha[0];
+   
+
+    //la fase debe ser una de las que se encuentra en la bse 
     if ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'){
-        $sql = "insert into registrocostosindirectos values('','$fechaActual','1','$cantidad')";
+        $sql = "insert into registrocostosindirectos values('', '$rowidCosecha[0]')";
     }else{
-        $sql = "insert into registromateriaprima values('','$fechaActual','2','$cantidad')";
+        $sql = "insert into registrocostosindirectos values('', '$rowidCosecha[1]')";
     }
+    $miconexion->consulta($sql);
+
+    $sql = "SELECT MAX(idregistroCostosIndirectos) FROM registrocostosindirectos";
+    $miconexion->consulta($sql);
+    $rowmaxidRegistroCI = $miconexion->consultaListaPrueba();
+    $rowmaxidRegistroCI = $rowmaxidRegistroCI[0];
+
+    $sql = "INSERT INTO registrocostosindirectos_has_costosindirectos VALUES('', '$rowmaxidRegistroCI', '$idci', '$fecha', '$cantidad')";
     $miconexion->consulta($sql);
 }
 

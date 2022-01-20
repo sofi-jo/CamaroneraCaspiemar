@@ -10,13 +10,13 @@
         <div class="opciones">
             <a href="<?php echo $urlSitio; ?>includes/materiaPrimaCosecha.php?fase=1&idCosecha=<?php echo $idRegistro;?>">Materia Prima</a>
             <a href="<?php echo $urlSitio; ?>includes/areasLaboralesT.php">Mano de Obra</a>
-            <a href="<?php echo $urlSitio; ?>includes/registroCostoIndirecto.php?fase=1">Costos Indirectos</a>
+            <a href="<?php echo $urlSitio; ?>includes/registroCostoIndirecto.php?fase=1&idCosecha=<?php echo $idRegistro;?>">Costos Indirectos</a>
         </div>
         <h3 class="titulo3">Fase 2: Engorde</h3>
         <div class="opciones">
         <a href="<?php echo $urlSitio; ?>includes/materiaPrimaCosecha.php?fase=2&idCosecha=<?php echo $idRegistro;?>">Materia Prima</a>
             <a href="<?php echo $urlSitio; ?>includes/areasLaboralesT.php">Mano de Obra</a>
-            <a href="<?php echo $urlSitio; ?>includes/registroCostoIndirecto.php?fase=2">Costos Indirectos</a>
+            <a href="<?php echo $urlSitio; ?>includes/registroCostoIndirecto.php?fase=2&idCosecha=<?php echo $idRegistro;?>">Costos Indirectos</a>
         </div>
     </div>
 <?php
