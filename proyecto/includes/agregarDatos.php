@@ -14,7 +14,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
     <h2 class="titulo">Agregar Materia Prima a la Base de Datos</h2>
 
-    <form class ="formulario" method="post" autocomplete="off">
+    <form class="formulario" method="post" autocomplete="off">
         <input type="text" name="nombre" placeholder="Ingrese nombre de producto"><br>
         <input type="text" name="descripcionNuevo" placeholder="Ingresar descripcion"><br>
         <input type="submit" value="Agregar">
@@ -106,7 +106,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <form name="myformci" class ="formulario" method="post">
+    <form name="myformci" class ="formulario" method="post" autocomplete="off">
 
     <script>
     $( function() {
