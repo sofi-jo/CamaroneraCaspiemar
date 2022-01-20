@@ -11,7 +11,7 @@
             $sql="delete from materiaprima where idmateriaPrima=$idRegistro";
             $miconexion->consulta($sql);
     
-            echo "<script>alert('Datos elimanados....') </script>";
+            
             echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
         
         }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2'){
@@ -31,6 +31,12 @@
             $miconexion->consulta($sql);
     
             echo "<script>location.href='arealaboral.php'</script>";
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/costosIndirectos.php'){
+            $sql="delete from costosindirectos where idcostosIndirectos=$idRegistro";
+            $miconexion->consulta($sql);
+    
+            echo "<script>location.href='costosIndirectos.php'</script>";
+        
         }
 
     } 
@@ -44,7 +50,7 @@
             echo <<< EOT
             <main class="content">
             <h2 class="titulo">Fornmulario de actualización de productos</h2>
-            <form method="post">
+            <form method="post" autocomplete="off">
             <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
             <input type="text" name="nombre" value = $listaUser[2]><br>
             <input type="text" name="descripcion" placeholder="Ingrese la descripcion del producto" value = $listaUser[1]><br>
@@ -68,7 +74,7 @@
             <main class="content">
             <h2 class="titulo">Fornmulario de actualización de productos de la Cosecha</h2>
             Producto: $listaUser[0]
-            <form method="post">
+            <form method="post" autocomplete="off">
             <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
             Cantidad
             <input type="text" name="cantidad" placeholder="Ingrese la cantidad del producto" value = $listaUser[3]><br>
@@ -99,7 +105,7 @@
             <main class="content">
             <h2 class="titulo">Fornmulario de actualización de Costos Indirectos</h2>
             Producto: $listaUser[0]
-            <form method="post">
+            <form method="post" autocomplete="off">
             <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
             Tipo
             <input type="text" name="tipoCostos" placeholder="Ingrese el tipo de producto" value = $listaUser[1]><br>

@@ -7,7 +7,7 @@ include("../dll/class_mysqli.php");
 
 		<h1>Trabajadores</h2>
 		
-		<form class ="formulario" method="post" action="agregTrabajadorTemp.php">
+		<form class ="formulario" method="post" action="agregTrabajadorTemp.php" autocomplete="off">
          
 			<input type="text" name="cedula" placeholder="Ingresar Cedula"><br>
 			<input type="text" name="tipo" placeholder="Ingresar Tipo Oficio"><br>

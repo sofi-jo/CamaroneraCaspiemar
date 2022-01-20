@@ -15,6 +15,6 @@
     <header>
       <nav>
         <img src="<?php echo $urlSitio; ?>images/logo.png" alt="logo" />
-        <a href="<?php echo $urlSitio; ?>includes/cosechas.php"><h3 >Iniciar Sesión</h3></a>
+        <a href="<?php echo $urlSitio; ?>login.php"><h3 >Iniciar Sesión</h3></a>
       </nav>
     </header>
