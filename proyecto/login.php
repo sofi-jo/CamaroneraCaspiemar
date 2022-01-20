@@ -1,6 +1,6 @@
 <?php
     require_once("dll/connection.php");
-    include("includes/cabecera.php");
+  
     session_start();
 
     if(isset($_POST["login"])){
@@ -35,6 +35,7 @@
 ?>
     <div class="container mlogin">
         <div id="login">
+        <link rel="stylesheet" type="text/css" href="<?php echo $urlSitio;?>styles/stylelog.css">
     <h1>Autenticación de Usuario</h1>
     <form name="loginform" id="loginform" action="" method="POST">
             <p>
@@ -56,6 +57,6 @@
     </form>
     </div>
     </div>
-    <?php include("includes/piePagina.php")?>
+
     <?php if (!empty($message)) {echo "<p class=\"error\">"."MESSAGE: ".$message . "</p>";} ?>
     

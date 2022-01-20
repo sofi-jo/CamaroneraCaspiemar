@@ -1,6 +1,6 @@
 <?php
 require_once("dll/connection.php");
-include("includes/cabecera.php");
+
 session_start();
 
 if (isset($_POST["register"])) {
@@ -44,8 +44,9 @@ if (!empty($_POST['fullname'])&&!empty($_POST['email'])&&!empty($_POST['username
 ?>
 <?php if (!empty($message)) {echo"<p class = \"error\">" . "Mensaje: ". $message . "</p>";}?>
 
-<div class="container mregister">
+<div class="containermregister">
     <div id="login">
+    <link rel="stylesheet" type="text/css" href="<?php echo $urlSitio;?>styles/stylelog.css">
         <h1>Registrar</h1>
         <form name="registerform"  id="registerform" action="register.php" method="post">
             <p>
@@ -60,7 +61,7 @@ if (!empty($_POST['fullname'])&&!empty($_POST['email'])&&!empty($_POST['username
 
             <p>
                 <label for="user_pass">Nombre Usuario<br />
-                <input type="text" name="username" id="username" class="input" size="20" value ="" /></label>
+                <input type="text" name="username" id="username" class="input" size="30" value ="" /></label>
             </p>
 
             <p>
@@ -76,4 +77,3 @@ if (!empty($_POST['fullname'])&&!empty($_POST['email'])&&!empty($_POST['username
         </form>
     </div>
 </div>
-<?php include("includes/piePagina.php")?>

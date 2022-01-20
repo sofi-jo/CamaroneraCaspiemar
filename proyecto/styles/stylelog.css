@@ -1,0 +1,74 @@
+*{
+    margin: auto;
+    padding: 0;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-decoration: none;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #a9cfe6;
+    height: 150px;
+}
+
+h1{
+    color: #2A6F97;
+    text-align: center;
+    display: block;
+}
+
+div{
+    background-color: rgb(208, 246, 255);
+    display: block;
+    padding: auto;
+    width: 60%;
+}
+
+form{
+    display: block;
+    background-color: #2A6F97;
+    text-align: center;
+    padding: 45px 100px;
+    margin: 30px 50px;
+    color: white;
+    font-size: 15px;
+}
+
+.regtext{
+    text-align: center;
+    color: aliceblue;
+
+}
+
+div.containermlogin{
+display: inline-block;
+position: inherit;
+width: 80%;
+background-color: antiquewhite;
+block-size: auto;
+align-content: center;
+}
+
+div.containermregister{
+    display: inline-block;
+    position: inherit;
+    width: 80%;
+    background-color: antiquewhite;
+    block-size: auto;
+    align-content: center;
+    }
+
+a{
+    color: goldenrod;
+}
+
+input[type=submit] {
+    text-align: center;
+    background-color: rgb(208, 246, 255);
+    padding: 10px 30px;
+    margin: 20px 5px;
+    border: none;
+    color: rgb(99, 99, 99);
+}
