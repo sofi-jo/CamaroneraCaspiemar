@@ -28,6 +28,8 @@ class clase_mysqli7
 	}
 */
 	//funcion conect db
+
+
 	function conectar($host, $user, $pass, $db)
 	{
 		if ($db != "") $this->BaseDatos = $db;
@@ -44,7 +46,7 @@ class clase_mysqli7
 		}
 		return $this->Conexion_ID;
 	}
-
+	
 	//funcion de ejecutar un sql
 	//se inicializa la variable para poder controlar la excepcion
 	function consulta($sql = "")
@@ -278,5 +280,38 @@ class clase_mysqli7
 			echo "<option value='$row[1]' oldvalue='$row[0]'>";
 		}
 		echo '</datalist>';
+	}
+
+	function verconsulta4()
+	{
+		echo <<< EOT
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+		<script>
+			$(document).ready( function () {
+				$('#tabla').DataTable();
+			} );
+		</script>
+		
+		EOT;
+
+		echo "<table id='tabla' class='display' style='width:100%'>";
+		echo "<thead>";
+		echo "<tr>";
+		for ($i = 0; $i < $this->numcampos(); $i++) {
+			echo "<th>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</th>";
+		}
+		echo "</tr>";
+		echo "</thead>";
+		echo "<tbody>";
+		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
+			echo "<tr>";
+			for ($i = 0; $i < $this->numcampos(); $i++) {
+				echo "<td>" . $row[$i] . "</td>";
+			}	
+			echo "</tr>";
+		}
+		echo "</tbody>";
+		echo "</table>";
 	}
 }

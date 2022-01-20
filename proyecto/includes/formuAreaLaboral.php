@@ -7,7 +7,7 @@ include("../dll/class_mysqli.php");
 
 		<h1>Area Laboral</h2>
 		
-		<form class ="formulario" method="post" action="agregAreaLaboral.php">
+		<form class ="formulario" method="post" action="agregAreaLaboral.php" autocomplete="off">
             //Trabajador fijo
             <input type="text" name="arealaboral" placeholder="Ingresar Area laboral"><br>
             <input type="text" name="sueldo" placeholder="Ingresar Sueldo"><br>

@@ -7,7 +7,7 @@ include("../dll/class_mysqli.php");
 
 		<h2 class ="titulo">Costo Indirecto</h2>
 		
-		<form class ="formulario" method="post" action="aggCostosIndirecDb.php">
+		<form class ="formulario" method="post" action="aggCostosIndirecDb.php" autocomplete="off">
             <input type="text" name="nombre" placeholder="Ingresar nombre costo"><br>
             <input type="text" name="tipo" placeholder="Ingresar tipo costo"><br>
 			<input type="submit" value="Agregar">

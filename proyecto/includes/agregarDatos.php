@@ -14,7 +14,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
     <h2 class="titulo">Agregar Materia Prima a la Base de Datos</h2>
 
-    <form class ="formulario" method="post">
+    <form class ="formulario" method="post" autocomplete="off">
         <input type="text" name="nombre" placeholder="Ingrese nombre de producto"><br>
         <input type="text" name="descripcionNuevo" placeholder="Ingresar descripcion"><br>
         <input type="submit" value="Agregar">
@@ -39,7 +39,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <form name="myformmp" class ="formulario" method="post">
+    <form name="myformmp" class ="formulario" method="post" autocomplete="off">
 
     <script>
     $( function() {
@@ -183,7 +183,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
     
     <main class="content">
     <h2 class="titulo">Agregar Cosecha</h2>
-    <form class ="formulario" method="post">
+    <form class ="formulario" method="post" autocomplete="off">
         <input type="text" name="peso" placeholder="Ingresar peso de la cosecha"><br>
         <input type="text" id="campofechainicio" name="fechaInicio" placeholder="Ingresar la fecha de inicio"><br>
         <input type="text" id="campofechafin" name="fechaFin" placeholder="Ingresar la fecha de fin"><br>
@@ -207,7 +207,7 @@ elseif ($urlFrom == $ruta.'trabajadores.php') {
 
     <h2 class="titulo">Agregar Trabajador</h2>
 
-    <form class ="formulario" method="post">
+    <form class ="formulario" method="post" autocomplete="off">
         <input type="text" name="tipo" placeholder="Ingresar precio x hora"><br>
         <input type="text" name="precioHora" placeholder="Ingrese el precio por hora"><br>
         <input type="text" name="cantidadHoras" placeholder="Ingresar cantidad horas trabajadas"><br>

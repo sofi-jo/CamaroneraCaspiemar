@@ -1,6 +1,6 @@
 <?php
 require_once("dll/connection.php");
-include("includes/cabecera.php");
+
 session_start();
 
 if (isset($_POST["register"])) {
@@ -28,15 +28,15 @@ if (!empty($_POST['fullname'])&&!empty($_POST['email'])&&!empty($_POST['username
 
 
        if ($result) {
-           $message = "Cuenta Creada";
+           echo '<script>alert("Cuenta Creada");</script>';
        }else {
-           $message = "Error al ingresar información";
+            echo '<script>alert("Error al ingresar información");</script>';
        }
     }else {
-        $message = "El nombre del usuario ya existe! Por favor intenta con otro";
+        echo '<script>alert("El nombre del usuario ya existe! Por favor intenta con otro");</script>';
     }
 }else {
-    $message = "Todos lo campos no deben estar vacíos";
+    echo '<script>alert("Todos lo campos no deben estar vacíos");</script>';
 }
 
 }
@@ -44,10 +44,11 @@ if (!empty($_POST['fullname'])&&!empty($_POST['email'])&&!empty($_POST['username
 ?>
 <?php if (!empty($message)) {echo"<p class = \"error\">" . "Mensaje: ". $message . "</p>";}?>
 
-<div class="container mregister">
+<div class="containermregister">
     <div id="login">
-        <h1>Registrar</h1>
-        <form name="registerform"  id="registerform" action="register.php" method="post">
+    <link rel="stylesheet" type="text/css" href="<?php echo $urlSitio;?>styles/stylelog.css">
+        <form name="registerform"  id="registerform" action="register.php" method="post" autocomplete="off">
+            <h1>Registrar</h1>
             <p>
                 <label for="user_login">Nombre Completo<br />
                 <input type="text" name="fullname" id="fullname" class="input" size="32" value ="" /></label>
@@ -60,7 +61,7 @@ if (!empty($_POST['fullname'])&&!empty($_POST['email'])&&!empty($_POST['username
 
             <p>
                 <label for="user_pass">Nombre Usuario<br />
-                <input type="text" name="username" id="username" class="input" size="20" value ="" /></label>
+                <input type="text" name="username" id="username" class="input" size="30" value ="" /></label>
             </p>
 
             <p>
@@ -76,4 +77,3 @@ if (!empty($_POST['fullname'])&&!empty($_POST['email'])&&!empty($_POST['username
         </form>
     </div>
 </div>
-<?php include("includes/piePagina.php")?>

@@ -20,7 +20,7 @@
               $( "#campofechafin" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
             });
         </script>
-		<form class ="formulario_reporte" method="post" action="aggCostosIndirecDb.php">
+		<form class ="formulario_reporte" method="post" action="reportes.php" autocomplete="off">
             <label for="fecha_inicio">Fecha Inicio: </label>
             <input type="select" id="campofechainicio" name="fecha_inicio" placeholder="" ><br>
             <label for="fecha_fin">Fecha Fin: </label>
@@ -50,20 +50,26 @@
     if ($filtrar == "1") {
         echo "1";
     }elseif ($filtrar == "2") {
-        echo "2";
+        $sql = "SELECT m.nombre'Nombre', cantidad'Cantidad', costoUnitario'Costo Unitario',totatl'Total' 
+        FROM registromateriaprima_has_materiaprima as rm
+        INNER JOIN materiaprima m ON m.idmateriaprima  = rm.materiaPrima_idmateriaPrima
+        WHERE rm.fecha BETWEEN '$fechaInicio' AND '$fechaFin';";
     }elseif ($filtrar == "3") {
         echo "3";
     }elseif ($filtrar == "4") {
-        echo "4";
+        $sql ="SELECT c.nombre'Nombre', c.tipo'Descripción',totalCostoIndirecto'Total' 
+        FROM registrocostosindirectos_has_costosindirectos rc
+        INNER JOIN costosindirectos c ON c.idcostosIndirectos  = rc.costosIndirectos_idcostosIndirectos
+        WHERE rc.fecha BETWEEN '$fechaInicio' AND '$fechaFin';";
     }
     /* $sql = "SELECT 
     FROM registromateriaprima rm
     INNER JOIN registromateriaprima_has_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
     INNER JOIN materiaprima m ON m.idmateriaprima  = r.materiaPrima_idmateriaPrima
     WHERE ( rm.Fase_idFase % 2 ) = 0;"; */
-    $miconexion->consulta("select idcostosIndirectos 'Id', nombre'Nombre', tipo'Tipo' from costosindirectos");
-    $miconexion->verconsulta3();
-
+    @$miconexion->consulta($sql);
+    @$miconexion->verconsulta4();
+    echo '<br>';
     echo '</main>';
 
 
