@@ -28,6 +28,8 @@ class clase_mysqli7
 	}
 */
 	//funcion conect db
+
+
 	function conectar($host, $user, $pass, $db)
 	{
 		if ($db != "") $this->BaseDatos = $db;
@@ -44,7 +46,7 @@ class clase_mysqli7
 		}
 		return $this->Conexion_ID;
 	}
-
+	
 	//funcion de ejecutar un sql
 	//se inicializa la variable para poder controlar la excepcion
 	function consulta($sql = "")

@@ -1,6 +1,6 @@
 <?php
-    include("includes/cabecera.php");
-    include("dll/class_mysqli.php");
+    @include("includes/cabecera.php");
+    @include("dll/class_mysqli.php");
 ?>
     <main>
       <h1 class="titulo">Camaronera CASPIEMAR</h1>

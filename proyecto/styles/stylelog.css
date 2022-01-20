@@ -1,5 +1,4 @@
 *{
-    margin: auto;
     padding: 0;
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     text-decoration: none;
@@ -8,22 +7,18 @@ body{
     margin: 0;
     padding: 0;
 }
-header {
-    background-color: #a9cfe6;
-    height: 150px;
-}
+
 
 h1{
-    color: #2A6F97;
+    color: #fff;
     text-align: center;
-    display: block;
+    margin-bottom: 30px;
 }
 
 div{
-    background-color: rgb(208, 246, 255);
     display: block;
-    padding: auto;
-    width: 60%;
+    margin: 100px auto;
+    width: 40%;
 }
 
 form{
@@ -39,36 +34,36 @@ form{
 .regtext{
     text-align: center;
     color: aliceblue;
-
 }
 
-div.containermlogin{
-display: inline-block;
-position: inherit;
-width: 80%;
-background-color: antiquewhite;
-block-size: auto;
-align-content: center;
-}
 
-div.containermregister{
+div.containermregister ,div.containermlogin{
     display: inline-block;
-    position: inherit;
-    width: 80%;
-    background-color: antiquewhite;
-    block-size: auto;
+    width: 100%;
     align-content: center;
-    }
+}
 
 a{
     color: goldenrod;
 }
 
+input[type=text] , [type=password], [type=email]{
+    position: relative;
+    text-align: center;
+    padding: 10px 70px;
+    margin: 5px;
+    border: none;
+    border-bottom: 1px solid #000;
+    cursor: pointer;
+}
+
 input[type=submit] {
     text-align: center;
     background-color: rgb(208, 246, 255);
-    padding: 10px 30px;
+    padding: 15px 40px;
     margin: 20px 5px;
     border: none;
-    color: rgb(99, 99, 99);
+    color: #000;
 }
+
+
