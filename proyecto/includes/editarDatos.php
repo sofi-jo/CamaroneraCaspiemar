@@ -15,17 +15,30 @@
             echo "<script>location.href='gestionarBDmateriaPrima.php'</script>";
         
         }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2'){
-            $sql="delete from registromateriaprima where idregistromateriaPrima=$idRegistro";
+            $sql="delete from registromateriaprima_has_materiaprima where registroMateriaPrima_idregistroMateriaPrima=$idRegistro";
+            $miconexion->consulta($sql);
+
+            $sql="delete from registromateriaprima where idregistroMateriaPrima=$idRegistro";
             $miconexion->consulta($sql);
 
             if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
-                echo "<script>location.href='/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'</script>";
+                echo "<script>location.href='materiaPrimaCosecha.php?fase=1&idcosecha=" . $idCosecha . "'</script>";
             }else{
-                echo "<script>location.href='/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2'</script>";
+                echo "<script>location.href='materiaPrimaCosecha.php?fase=2&idcosecha=" . $idCosecha . "'</script>";
+            }
+        }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2'){
+            $sql="delete from registrocostosindirectos_has_costosindirectos where registroCostosIndirectos_idregistroCostosIndirectos=$idRegistro";
+            $miconexion->consulta($sql);
+
+            $sql="delete from registrocostosindirectos where idregistroCostosIndirectos=$idRegistro";
+            $miconexion->consulta($sql);
+
+            if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=1'){
+                echo "<script>location.href='registroCostoIndirecto.php?fase=1&idcosecha=" . $idCosecha . "'</script>";
+            }else{
+                echo "<script>location.href='registroCostoIndirecto.php?fase=2&idcosecha=" . $idCosecha . "'</script>";
             }
     
-            echo "<script>location.href='materiaPrimaCosecha.php'</script>";
-        
         }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/areaslaborales.php'){
             $sql="delete from areasLaborales where id_areaLaboral=$idRegistro";
             $miconexion->consulta($sql);
