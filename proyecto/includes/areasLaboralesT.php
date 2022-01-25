@@ -13,7 +13,7 @@
     // es necesario que haya una consulta antes de llamar a una funcion, en el caso de llamar a dos funciones solo reconocera la primera
    
     $miconexion->consulta($sql);
-    $miconexion->verconsultaenlace(); 
+    $miconexion->verconsultaenlace1(); 
 
     echo '</main>';
     include("piePagina.php");

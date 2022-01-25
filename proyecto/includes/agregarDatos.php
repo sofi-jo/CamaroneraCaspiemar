@@ -204,29 +204,67 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 elseif ($urlFrom == $ruta.'trabajadores.php') {
     echo <<< EOT
     <main class="content">
+    <h2 class ="titulo">Agregar Costos Indirectos</h2>
 
-    <h2 class="titulo">Agregar Trabajador</h2>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <form class ="formulario" method="post" autocomplete="off">
-        <input type="text" name="tipo" placeholder="Ingresar precio x hora"><br>
-        <input type="text" name="precioHora" placeholder="Ingrese el precio por hora"><br>
-        <input type="text" name="cantidadHoras" placeholder="Ingresar cantidad horas trabajadas"><br>
-        <input type="text" name="telefono" placeholder="Ingresar telefono"><br>
-        <input type="text" name="correo" placeholder="Ingresar correo"><br>
-        <input type="text" name="nombres" placeholder="Ingresar nombres"><br>
-        <input type="text" name="apellidos" placeholder="Ingresar apellidos"><br>
-        <input type="text" name="aportacionIESS" placeholder="Ingresar aportacion IESS"><br>
-        <input type="text" name="salario" placeholder="Ingresar salario"><br>
+    <form name="myformci" class ="formulario" method="post" autocomplete="off">
+
+    <script>
+    $( function() {
+      $( "#campofechainicio" ).datepicker({
+        numberOfMonths: 1,
+      });
+      $( "#campofechainicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    } );
+    </script>
+
+    EOT;
+
+    $sql = "select idcostosIndirectos, nombre from costosindirectos";
+    $miconexion->consulta($sql);
+    $miconexion->consultaListaCostosIndirectos();
+
+    echo <<< EOT
+        <input type="hidden" id=idci name=idci value="">
+        <input type="text" id="campofechainicio" name="fecha" placeholder="Ingresar fecha"><br>
+        <input type="text" name="cantidadP" placeholder="Ingresar cantidad pagada"><br>
         <input type="submit" value="Agregar">
+        <a class= 'cancelar' href='http://127.0.0.1/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'>Cancelar</a>
     </form>
 
     </main>
     EOT;
 
-    if(array_key_exists('peso',$_POST)){
-        #agregarDatos3();
+    echo <<< EOT
+    <script>
+
+    
+    $(document).ready(function() {
+        $('#inputlist').on('input', function() {
+            var inputval= $('#inputlist').val();
+            var oldval= $("datalist option[value='"+inputval+"']").attr('oldvalue');
+            console.log(oldval);
+            if (oldval){
+                var myidci = document.forms['myformci']['idci'];
+                myidci.setAttribute('value', oldval);
+            }
+        })
+    });
+    </script>
+    EOT;
+
+    if(array_key_exists('cantidadP',$_POST)){
+        agregarDatosCostosIndirectosCosecha();
+
         /*echo '<script>alert("Datos guardados...");</script>';*/
-        echo "<script>location.href='cosechas.php'</script>";
+        if ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'){
+            echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
+        }else{
+            echo "<script>location.href='registroCostoIndirecto.php?fase=2'</script>";
+        }
     }
 }
 
