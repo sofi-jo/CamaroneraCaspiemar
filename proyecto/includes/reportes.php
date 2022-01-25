@@ -22,9 +22,9 @@
         </script>
 		<form class ="formulario_reporte" method="post" action="reportes.php" autocomplete="off">
             <label for="fecha_inicio">Fecha Inicio: </label>
-            <input type="select" id="campofechainicio" name="fecha_inicio" placeholder="" ><br>
+            <input type="select" id="campofechainicio" name="fecha_inicio" placeholder="AAAA-MM-DD" ><br>
             <label for="fecha_fin">Fecha Fin: </label>
-            <input type="select" id="campofechafin" name="fecha_fin"><br>
+            <input type="select" id="campofechafin" name="fecha_fin" placeholder="AAAA-MM-DD"><br>
             <label for="filtrar">Filtrar por: </label>
             <select class="filtro" name="select">
                 <option value="1"selected>Todos</option>
