@@ -154,7 +154,6 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
     if(array_key_exists('cantidadP',$_POST)){
         agregarDatosCostosIndirectosCosecha();
-
         /*echo '<script>alert("Datos guardados...");</script>';*/
         if ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'){
             echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
