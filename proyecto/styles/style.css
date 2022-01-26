@@ -117,7 +117,7 @@ nav img{
 }
 
 
-input[type=text] , [type=search]{
+input[type=text] , [type=search], [type=mai]{
     position: relative;
     text-align: center;
     padding: 15px 200px;
@@ -234,7 +234,7 @@ main{
 footer{
     background-color: #2A6F97;
     position: relative;
-    bottom: 0;
+    bottom: 0px;
     height: 150px;
     width: 100%;
   

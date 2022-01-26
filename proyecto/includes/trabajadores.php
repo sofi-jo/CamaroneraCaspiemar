@@ -4,16 +4,18 @@
     $link = $_SERVER['REQUEST_URI'];
 
     echo '<main class="content">';
-    echo "<h2 class='titulo'>Trabajadores</h2>";
-    echo '<div class="agregar"><a href=agregarDatos.php?urlFrom=' . $link . '>Agregar +</a></div>';
+    echo "<h2 class='titulo'>Gestionar Trabajadores</h2>";
+    echo '<div class = "agregar"><a href="' . $urlSitio . 'includes/formuTrabajadores.php">Agregar +</a></div>';
+
 
     $miconexion= new clase_mysqli7;
     $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME); 
-    $sql="SELECT * FROM `trabajador`"; 
-    // es necesario que haya una consulta antes de llamar a una funcion, en el caso de llamar a dos funciones solo reconocera la primera
+    $miconexion->consulta("SELECT t.cedula 'Cedula',nombres 'Nombres',apellidos 'Apellidos',telefono 'Telefono',correo 'Correo',
+                    catidad_horas 'Horas de Trabajo',salario 'Salario', aportacion_iess 'IESS'
+                    FROM persona as p
+                    INNER JOIN trabajador t ON t.cedula = p.cedula;");
+	$miconexion->verconsulta5();
 
-    $miconexion->consulta($sql);
-    $miconexion->verconsulta3(); 
 
 
     echo '</main>';
