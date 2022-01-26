@@ -16,13 +16,13 @@
     if ($fase == 1){
         $sql ="SELECT rc.idregistroCostosIndirectos, c.nombre, r.fecha'Fecha', r.totalCostoIndirecto'Total'
         FROM registrocostosindirectos rc
-        INNER JOIN registrocostosindirectos_has_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
+        INNER JOIN registrocostosindirectos_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
         INNER JOIN costosindirectos c ON c.idcostosIndirectos = r.costosIndirectos_idcostosIndirectos
         WHERE ( rc.Fase_idFase % 2 ) != 0;";
     }elseif($fase == 2){
         $sql = "SELECT rc.idregistroCostosIndirectos, c.nombre, r.fecha'Fecha', r.totalCostoIndirecto'Total'
         FROM registrocostosindirectos rc
-        INNER JOIN registrocostosindirectos_has_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
+        INNER JOIN registrocostosindirectos_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
         INNER JOIN costosindirectos c ON c.idcostosIndirectos = r.costosIndirectos_idcostosIndirectos
         WHERE ( rc.Fase_idFase % 2 ) = 0;";
     }

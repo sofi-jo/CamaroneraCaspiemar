@@ -91,7 +91,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
        
         if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
-            echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=1&idCosecha=$idCosecha'</script>";
         }else{
             echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
         }
@@ -157,9 +157,9 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
         /*echo '<script>alert("Datos guardados...");</script>';*/
         if ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'){
-            echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
+            #echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
         }else{
-            echo "<script>location.href='registroCostoIndirecto.php?fase=2'</script>";
+            #echo "<script>location.href='registroCostoIndirecto.php?fase=2'</script>";
         }
     }
 }elseif ($urlFrom == $ruta.'cosechas.php') {
@@ -280,7 +280,7 @@ function agregarDatosMateriaPrimaCosecha(){
 
 
 
-    $sql = "INSERT INTO registromateriaprima_has_materiaprima VALUES('', '$rowmaxidRegistroMP', '$idmp', '$fecha', '$cantidad', '$precioU', '$total')";
+    $sql = "INSERT INTO registromateriaprima_materiaprima VALUES('', '$rowmaxidRegistroMP', '$idmp', '$fecha', '$cantidad', '$precioU', '$total')";
     $miconexion->consulta($sql);
 }
 
@@ -315,7 +315,7 @@ function agregarDatosCostosIndirectosCosecha(){
     $rowmaxidRegistroCI = $miconexion->consultaListaPrueba();
     $rowmaxidRegistroCI = $rowmaxidRegistroCI[0];
 
-    $sql = "INSERT INTO registrocostosindirectos_has_costosindirectos VALUES('', '$rowmaxidRegistroCI', '$idci', '$fecha', '$cantidad')";
+    $sql = "INSERT INTO registrocostosindirectos_costosindirectos VALUES('', '$rowmaxidRegistroCI', '$idci', '$fecha', '$cantidad')";
     $miconexion->consulta($sql);
 }
 

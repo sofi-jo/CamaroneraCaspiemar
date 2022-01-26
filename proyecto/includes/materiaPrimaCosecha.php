@@ -19,18 +19,23 @@ $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 if ($fase == 1) {
 
     $sql = "SELECT idRegistroMateriaPrima, m.nombre'Nombre', fecha'FECHA', cantidad'Cantidad', costoUnitario'Costo Unitario',
-    totatl'Total' 
+    total'Total' 
     FROM registromateriaprima rm
-    INNER JOIN registromateriaprima_has_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
+    INNER JOIN registromateriaprima_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
     INNER JOIN materiaprima m ON m.idmateriaprima  = r.materiaPrima_idmateriaPrima
-    WHERE ( rm.Fase_idFase % 2 ) != 0;";
+    INNER JOIN fase f ON rm.Fase_idFase = f.idFase
+    WHERE ( rm.Fase_idFase % 2 ) != 0 AND f.cosecha_idcosecha = $idCosecha;";
+
     
     } elseif ($fase == 2) {
-    $sql = "SELECT 
+    $sql = "SELECT idRegistroMateriaPrima, m.nombre'Nombre', fecha'FECHA', cantidad'Cantidad', costoUnitario'Costo Unitario',
+    total'Total' 
     FROM registromateriaprima rm
-    INNER JOIN registromateriaprima_has_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
+    INNER JOIN registromateriaprima_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
     INNER JOIN materiaprima m ON m.idmateriaprima  = r.materiaPrima_idmateriaPrima
-    WHERE ( rm.Fase_idFase % 2 ) = 0;";
+    INNER JOIN fase f ON rm.Fase_idFase = f.idFase
+    WHERE ( rm.Fase_idFase % 2 ) = 0 AND f.cosecha_idcosecha = $idCosecha;";
+
 }
 // es necesario que haya una consulta antes de llamar a una funcion, en el caso de llamar a dos funciones solo reconocera la primera
 
