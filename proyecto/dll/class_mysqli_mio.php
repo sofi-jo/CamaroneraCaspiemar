@@ -143,6 +143,7 @@ class clase_mysqli7
 		for ($i = 1; $i < $this->numcampos(); $i++) {
 			echo "<th>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</th>";
 		}
+		echo "<th>Visualizar</th>";
 		echo "<th>Editar</th>";
 		echo "</tr>";
 		echo "</thead>";
@@ -152,9 +153,24 @@ class clase_mysqli7
 			for ($i = 1; $i < $this->numcampos(); $i++) {
 				echo "<td>" . $row[$i] . "</td>";
 			}
-			echo "<td><a href='trabajadorTemp.php?idRegistro=$row[0]'>Visualizar</a></td>";
-			echo "</tr>";
+			$link = $_SERVER['REQUEST_URI'];
+			echo "<td><a href='trabajadores.php?idRegistro=$row[0]'>Visualizar</a></td>";
+			echo <<< EOT
+			<td>
+				<form action="editarDatos.php">
+					<select name="tipoEdit" onchange="location = this.value;">
+						<option>...</option>
+						<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Actualizar&idRegistro=$row[0]">Actualizar</option>
+						<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Eliminar&idRegistro=$row[0]">Eliminar</option>
+					</select>
+				</form>
+			</td>
+			</tr>
+			</tbody>
+			EOT;
 		}
+
+		
 		echo "</tbody>";
 		echo "</table>";
 	}
@@ -280,7 +296,6 @@ class clase_mysqli7
 				</form>
 			</td>
 			</tr>
-			</tbody>
 			EOT;
 		}
 		echo "</tbody>";
@@ -314,6 +329,31 @@ class clase_mysqli7
 		echo '</datalist>';
 	}
 
+	function consultaListaAreasLaborales()
+	{
+		echo <<< EOT
+		<input type="search" id=inputlist name="busquedaAreasLaborales" placeholder = "Area Laboral" list="listamodelos"><br>
+		<datalist id="listamodelos">
+		EOT;
+
+		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
+			echo "<option value='$row[1]' oldvalue='$row[0]'>";
+		}
+		echo '</datalist>';
+	}
+
+	function consultaListaTrabajadoresTemporales()
+	{
+		echo <<< EOT
+		<input type="search" id=inputlist name="busquedaTrabajadorTemporal" placeholder = "Trabajador Temporal" list="listamodelos"><br>
+		<datalist id="listamodelos">
+		EOT;
+
+		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
+			echo "<option value='$row[1] $row[2]' oldvalue='$row[0]'>";
+		}
+		echo '</datalist>';
+	}
 	function verconsulta4()
 	{
 		echo <<< EOT
@@ -342,6 +382,52 @@ class clase_mysqli7
 				echo "<td>" . $row[$i] . "</td>";
 			}	
 			echo "</tr>";
+		}
+		echo "</tbody>";
+		echo "</table>";
+	}
+	function verconsulta5()
+	{
+		echo <<< EOT
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+		<script>
+			$(document).ready( function () {
+				$('#tabla').DataTable();
+			} );
+		</script>
+		
+		EOT;
+
+		echo "<table id='tabla' class='display' style='width:100%'>";
+		echo "<thead>";
+		echo "<tr>";
+		for ($i = 0; $i < $this->numcampos(); $i++) {
+			echo "<th>" . mysqli_fetch_field_direct($this->Consulta_ID, $i)->name . "</th>";
+		}
+		echo "<th>Editar</th>";
+		echo "</tr>";
+		echo "</thead>";
+		echo "<tbody>";
+		while ($row = mysqli_fetch_array($this->Consulta_ID)) {
+			echo "<tr>";
+			for ($i = 0; $i < $this->numcampos(); $i++) {
+				echo "<td>" . $row[$i] . "</td>";
+			}
+			$link = $_SERVER['REQUEST_URI'];
+			
+			echo <<< EOT
+			<td>
+				<form action="editarDatos.php">
+					<select name="tipoEdit" onchange="location = this.value;">
+						<option>...</option>
+						<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Actualizar&idRegistro=$row[0]">Actualizar</option>
+						<option value = "editarDatos.php?urlFrom=$link&tipoEdit=Eliminar&idRegistro=$row[0]">Eliminar</option>
+					</select>
+				</form>
+			</td>
+			</tr>
+			EOT;
 		}
 		echo "</tbody>";
 		echo "</table>";

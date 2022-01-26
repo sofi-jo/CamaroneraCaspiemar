@@ -7,11 +7,12 @@ include("../dll/class_mysqli.php");
 $miconexion= new clase_mysqli7;
 $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
-//insert, delete, update, listar
-$sql = "insert into areaLaboral values('$cedula', '$tipo', '$catidad_horas', '$telefono', '$correo', '$apellidos','$nombres', '$areaLaboral_id_areaLaboral')";
+
+$sql = "insert into persona values('$cedula','$nombres','$apellidos','$correo','$telefono')";
+$miconexion->consulta($sql);
+$sql = "insert into trabajador_temp values('$cedula', '$precio_hora')";
 $miconexion->consulta($sql);
 
-echo '<script>alert("Datos guardados...");</script>';
 echo "<script>location.href='trabajadorTemp.php';</script>";
 ?>
 <?php

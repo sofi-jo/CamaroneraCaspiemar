@@ -51,14 +51,14 @@
         echo "1";
     }elseif ($filtrar == "2") {
         $sql = "SELECT m.nombre'Nombre', cantidad'Cantidad', costoUnitario'Costo Unitario',totatl'Total' 
-        FROM registromateriaprima_has_materiaprima as rm
+        FROM registromateriaprima_materiaprima as rm
         INNER JOIN materiaprima m ON m.idmateriaprima  = rm.materiaPrima_idmateriaPrima
         WHERE rm.fecha BETWEEN '$fechaInicio' AND '$fechaFin';";
     }elseif ($filtrar == "3") {
         echo "3";
     }elseif ($filtrar == "4") {
         $sql ="SELECT c.nombre'Nombre', c.tipo'Descripción',totalCostoIndirecto'Total' 
-        FROM registrocostosindirectos_has_costosindirectos rc
+        FROM registrocostosindirectos_costosindirectos rc
         INNER JOIN costosindirectos c ON c.idcostosIndirectos  = rc.costosIndirectos_idcostosIndirectos
         WHERE rc.fecha BETWEEN '$fechaInicio' AND '$fechaFin';";
     }

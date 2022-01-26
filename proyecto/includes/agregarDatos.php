@@ -156,7 +156,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
         agregarDatosCostosIndirectosCosecha();
         /*echo '<script>alert("Datos guardados...");</script>';*/
         if ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'){
-            echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
+            //echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
         }else{
             echo "<script>location.href='registroCostoIndirecto.php?fase=2'</script>";
         }
@@ -198,18 +198,16 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
         /*echo '<script>alert("Datos guardados...");</script>';*/
         echo "<script>location.href='cosechas.php'</script>";
     }
-}
-
-elseif ($urlFrom == $ruta.'trabajadores.php') {
+}elseif ($urlFrom == $ruta.'areaLaboralCosecha.php?fase=1'or $urlFrom == $ruta.'areaLaboralCosecha.php?fase=2') {
     echo <<< EOT
     <main class="content">
-    <h2 class ="titulo">Agregar Costos Indirectos</h2>
+    <h2 class ="titulo">Agregar Area Laboral</h2>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <form name="myformci" class ="formulario" method="post" autocomplete="off">
+    <form name="myformal" class ="formulario" method="post" autocomplete="off">
 
     <script>
     $( function() {
@@ -222,16 +220,16 @@ elseif ($urlFrom == $ruta.'trabajadores.php') {
 
     EOT;
 
-    $sql = "select idcostosIndirectos, nombre from costosindirectos";
+    $sql = "select id_areaLaboral, nombre_area from arealaboral";
     $miconexion->consulta($sql);
-    $miconexion->consultaListaCostosIndirectos();
+    $miconexion->consultaListaAreasLaborales();
 
     echo <<< EOT
-        <input type="hidden" id=idci name=idci value="">
-        <input type="text" id="campofechainicio" name="fecha" placeholder="Ingresar fecha"><br>
+        <input type="hidden" id=idal name=idal value="">
+        <input type="text" id="campofechainicio" name="fecha" placeholder="Ingresar fecha de pago"><br>
         <input type="text" name="cantidadP" placeholder="Ingresar cantidad pagada"><br>
         <input type="submit" value="Agregar">
-        <a class= 'cancelar' href='http://127.0.0.1/CamaroneraCaspiemar/proyecto/includes/gestionarBDmateriaPrima.php'>Cancelar</a>
+        <a class= 'cancelar' href='http://127.0.0.1/CamaroneraCaspiemar/proyecto/includes/areaLaboralCosecha.php?fase=1'>Cancelar</a>
     </form>
 
     </main>
@@ -247,8 +245,8 @@ elseif ($urlFrom == $ruta.'trabajadores.php') {
             var oldval= $("datalist option[value='"+inputval+"']").attr('oldvalue');
             console.log(oldval);
             if (oldval){
-                var myidci = document.forms['myformci']['idci'];
-                myidci.setAttribute('value', oldval);
+                var myidal = document.forms['myformal']['idal'];
+                myidal.setAttribute('value', oldval);
             }
         })
     });
@@ -256,17 +254,81 @@ elseif ($urlFrom == $ruta.'trabajadores.php') {
     EOT;
 
     if(array_key_exists('cantidadP',$_POST)){
-        agregarDatosCostosIndirectosCosecha();
-
+        agregarDatosAreaLaboralCosecha();
         /*echo '<script>alert("Datos guardados...");</script>';*/
-        if ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'){
-            echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
+        if ($urlFrom == $ruta.'areaLaboralCosecha.php?fase=1'){
+            echo "<script>location.href='areaLaboralCosecha.php?fase=1'</script>";
         }else{
-            echo "<script>location.href='registroCostoIndirecto.php?fase=2'</script>";
+            echo "<script>location.href='areaLaboralCosecha.php?fase=2'</script>";
+        }
+    }
+}elseif ($urlFrom == $ruta.'trabajadorTempCosecha.php?fase=1'or $urlFrom == $ruta.'trabajadorTempCosecha.php?fase=2') {
+    echo <<< EOT
+    <main class="content">
+    <h2 class ="titulo">Agregar Trabajador Temporal</h2>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <form name="myformtt" class ="formulario" method="post" autocomplete="off">
+
+    <script>
+    $( function() {
+      $( "#campofechainicio" ).datepicker({
+        numberOfMonths: 1,
+      });
+      $( "#campofechainicio" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    } );
+    </script>
+
+    EOT;
+
+    $sql = "select t.cedula, p.nombres, p.apellidos
+    from trabajador_temp t
+    INNER JOIN persona p ON p.cedula = t.cedula;";
+    $miconexion->consulta($sql);
+    $miconexion->consultaListaTrabajadoresTemporales();
+
+    echo <<< EOT
+        <input type="hidden" id=idtt name=idtt value="">
+        <input type="text" id="campofechainicio" name="fecha" placeholder="Ingresar fecha de pago"><br>
+        <input type="text" name="cantHoras" placeholder="Ingresar Horas Trabajadas"><br>
+        <input type="submit" value="Agregar">
+        <a class= 'cancelar' href='http://127.0.0.1/CamaroneraCaspiemar/proyecto/includes/trabajadorTempCosecha.php?fase=1'>Cancelar</a>
+    </form>
+
+    </main>
+    EOT;
+
+    echo <<< EOT
+    <script>
+
+    
+    $(document).ready(function() {
+        $('#inputlist').on('input', function() {
+            var inputval= $('#inputlist').val();
+            var oldval= $("datalist option[value='"+inputval+"']").attr('oldvalue');
+            console.log(oldval);
+            if (oldval){
+                var myidtt = document.forms['myformtt']['idtt'];
+                myidtt.setAttribute('value', oldval);
+            }
+        })
+    });
+    </script>
+    EOT;
+
+    if(array_key_exists('cantHoras',$_POST)){
+        agregarDatosTrabajadoresTemporales();
+        /*echo '<script>alert("Datos guardados...");</script>';*/
+        if ($urlFrom == $ruta.'trabajadorTempCosecha.php?fase=1'){
+            //echo "<script>location.href='trabajadorTempCosecha.php?fase=1'</script>";
+        }else{
+            echo "<script>location.href='trabajadorTempCosecha.php?fase=2'</script>";
         }
     }
 }
-
 
 
 function agregarDatosMateriaPrima(){
@@ -296,8 +358,6 @@ function agregarDatosMateriaPrimaCosecha(){
     $sql = "SELECT idFase FROM fase WHERE cosecha_idcosecha = '$idCosecha'";
     $miconexion->consulta($sql);
     $rowidCosecha = $miconexion->consultaListaGaa();
-    #date_default_timezone_set('America/Bogota');
-    #$fechaActual = date('Y-m-d');
    
 
     //la fase debe ser una de las que se encuentra en la bse 
@@ -317,7 +377,7 @@ function agregarDatosMateriaPrimaCosecha(){
 
 
 
-    $sql = "INSERT INTO registromateriaprima_has_materiaprima VALUES('', '$rowmaxidRegistroMP', '$idmp', '$fecha', '$cantidad', '$precioU', '$total')";
+    $sql = "INSERT INTO registromateriaprima_materiaprima VALUES('', '$rowmaxidRegistroMP', '$idmp', '$fecha', '$cantidad', '$precioU', '$total')";
     $miconexion->consulta($sql);
 }
 
@@ -352,7 +412,74 @@ function agregarDatosCostosIndirectosCosecha(){
     $rowmaxidRegistroCI = $miconexion->consultaListaPrueba();
     $rowmaxidRegistroCI = $rowmaxidRegistroCI[0];
 
-    $sql = "INSERT INTO registrocostosindirectos_has_costosindirectos VALUES('', '$rowmaxidRegistroCI', '$idci', '$fecha', '$cantidad')";
+    $sql = "INSERT INTO registrocostosindirectos_costosindirectos VALUES('', '$rowmaxidRegistroCI', '$idci', '$fecha', '$cantidad')";
+    $miconexion->consulta($sql);
+}
+
+function agregarDatosAreaLaboralCosecha(){
+    global $idal;
+    global $miconexion;
+    global $urlFrom;
+    global $ruta;
+    global $fecha;
+    global $idCosecha;
+    $sql = "";
+
+    $sql = "SELECT idFase FROM fase WHERE cosecha_idcosecha = '$idCosecha'";
+    $miconexion->consulta($sql);
+    $rowidCosecha = $miconexion->consultaListaGaa();
+
+
+    //la fase debe ser una de las que se encuentra en la bse 
+    if ($urlFrom == $ruta.'areaLaboralCosecha.php?fase=1'){
+        $sql = "insert into registro_mano_obra values('', '$rowidCosecha[0]')";
+    }else{
+        $sql = "insert into registro_mano_obra values('', '$rowidCosecha[1]')";
+    }
+    $miconexion->consulta($sql);
+
+    $sql = "SELECT MAX(id_registro_mano_obre) FROM registro_mano_obra";
+    $miconexion->consulta($sql);
+    $rowmaxidRegistroCI = $miconexion->consultaListaPrueba();
+    $rowmaxidRegistroCI = $rowmaxidRegistroCI[0];
+    $sql = "INSERT INTO registro_mano_obra_arealaboral VALUES('', '$rowmaxidRegistroCI', '$idal', '$fecha')";
+    $miconexion->consulta($sql);
+}
+
+function agregarDatosTrabajadoresTemporales(){
+    global $idtt;
+    global $miconexion;
+    global $urlFrom;
+    global $ruta;
+    global $fecha;
+    global $idCosecha;
+    
+    $cantHoras = $_POST["cantHoras"];
+    $sql = "";
+
+    $sql = "SELECT idFase FROM fase WHERE cosecha_idcosecha = '$idCosecha'";
+    $miconexion->consulta($sql);
+    $rowidCosecha = $miconexion->consultaListaGaa();
+
+    //la fase debe ser una de las que se encuentra en la bse !@
+    if ($urlFrom == $ruta.'trabajadorTempCosecha.php?fase=1'){
+        $sql = "insert into registro_mano_obra values('', '$rowidCosecha[0]')";
+    }else{
+        $sql = "insert into registro_mano_obra values('', '$rowidCosecha[1]')";
+    }
+    $miconexion->consulta($sql);
+
+    $sql = "SELECT MAX(id_registro_mano_obre) FROM registro_mano_obra";
+    $miconexion->consulta($sql);
+    $rowmaxidRegistroCI = $miconexion->consultaListaPrueba();
+    $rowmaxidRegistroCI = $rowmaxidRegistroCI[0];
+    
+    $sql = "SELECT precio_hora FROM trabajador_temp WHERE cedula = $idtt";
+    $miconexion->consulta($sql);
+    $precioHora = $miconexion->consultaListaPrueba();
+    $pago = $cantHoras * $precioHora[0];
+
+    $sql = "INSERT INTO registro_mano_obra_trabajador_temp VALUES('', '$rowmaxidRegistroCI', '$idtt', '$cantHoras', '$pago')";
     $miconexion->consulta($sql);
 }
 

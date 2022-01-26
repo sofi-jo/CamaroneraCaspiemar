@@ -6,6 +6,7 @@
         <a href="<?php echo $urlSitio; ?>includes/gestionarBDmateriaPrima.php">Materia Prima</a>
         <a href="<?php echo $urlSitio; ?>includes/areasLaboralesT.php">Mano de Obra</a>
         <a href="<?php echo $urlSitio; ?>includes/costosIndirectos.php">Costos Indirectos</a>
+        <a href="<?php echo $urlSitio; ?>includes/trabajadorTemp.php">Trabajadores Temporales</a>
     </div>
         
 <?php

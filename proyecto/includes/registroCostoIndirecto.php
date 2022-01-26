@@ -6,7 +6,6 @@
 
     echo '<main class="content">';
     echo "<h2 class='titulo'>Costos Indirectos</h2>";
-    echo '<label id="texto_nav1"></label>';
 
     echo '<div class="agregar"><a href=agregarDatos.php?urlFrom=' . $link . '>Agregar +</a></div>';
 
@@ -14,15 +13,15 @@
     $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME); 
 
     if ($fase == 1){
-        $sql ="SELECT rc.idregistroCostosIndirectos, c.nombre, r.fecha'Fecha', r.totalCostoIndirecto'Total'
+        $sql ="SELECT rc.idregistroCostosIndirectos, r.fecha'Fecha',c.nombre'Nombre' , r.totalCostoIndirecto'Total'
         FROM registrocostosindirectos rc
-        INNER JOIN registrocostosindirectos_has_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
+        INNER JOIN registrocostosindirectos_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
         INNER JOIN costosindirectos c ON c.idcostosIndirectos = r.costosIndirectos_idcostosIndirectos
         WHERE ( rc.Fase_idFase % 2 ) != 0;";
     }elseif($fase == 2){
-        $sql = "SELECT rc.idregistroCostosIndirectos, c.nombre, r.fecha'Fecha', r.totalCostoIndirecto'Total'
+        $sql = "SELECT rc.idregistroCostosIndirectos, r.fecha'Fecha',c.nombre 'Nombre',  r.totalCostoIndirecto'Total'
         FROM registrocostosindirectos rc
-        INNER JOIN registrocostosindirectos_has_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
+        INNER JOIN registrocostosindirectos_costosindirectos r ON r.registroCostosIndirectos_idregistroCostosIndirectos = rc.idregistroCostosIndirectos
         INNER JOIN costosindirectos c ON c.idcostosIndirectos = r.costosIndirectos_idcostosIndirectos
         WHERE ( rc.Fase_idFase % 2 ) = 0;";
     }
