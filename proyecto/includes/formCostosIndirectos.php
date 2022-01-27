@@ -1,5 +1,5 @@
 <?php
-include("../dll/class_mysqli.php");
+include("../dll/class_mysqli_mio.php");
 @include("cabeceraInterna.php");
 ?>
 

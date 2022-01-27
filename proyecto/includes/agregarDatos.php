@@ -91,7 +91,7 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
 
        
         if ($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
-            echo "<script>location.href='materiaPrimaCosecha.php?fase=1'</script>";
+            echo "<script>location.href='materiaPrimaCosecha.php?fase=1&idCosecha=$idCosecha'</script>";
         }else{
             echo "<script>location.href='materiaPrimaCosecha.php?fase=2'</script>";
         }
@@ -156,9 +156,13 @@ if($urlFrom == $ruta.'gestionarBDmateriaPrima.php'){
         agregarDatosCostosIndirectosCosecha();
         /*echo '<script>alert("Datos guardados...");</script>';*/
         if ($urlFrom == $ruta.'registroCostoIndirecto.php?fase=1'){
+<<<<<<< HEAD
+            #echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
+=======
             //echo "<script>location.href='registroCostoIndirecto.php?fase=1'</script>";
+>>>>>>> 4bdf8f52265a750d9ef87316449794964910cd74
         }else{
-            echo "<script>location.href='registroCostoIndirecto.php?fase=2'</script>";
+            #echo "<script>location.href='registroCostoIndirecto.php?fase=2'</script>";
         }
     }
 }elseif ($urlFrom == $ruta.'cosechas.php') {
@@ -413,6 +417,8 @@ function agregarDatosCostosIndirectosCosecha(){
     $rowmaxidRegistroCI = $rowmaxidRegistroCI[0];
 
     $sql = "INSERT INTO registrocostosindirectos_costosindirectos VALUES('', '$rowmaxidRegistroCI', '$idci', '$fecha', '$cantidad')";
+<<<<<<< HEAD
+=======
     $miconexion->consulta($sql);
 }
 
@@ -480,6 +486,7 @@ function agregarDatosTrabajadoresTemporales(){
     $pago = $cantHoras * $precioHora[0];
 
     $sql = "INSERT INTO registro_mano_obra_trabajador_temp VALUES('', '$rowmaxidRegistroCI', '$idtt', '$cantHoras', '$pago')";
+>>>>>>> 4bdf8f52265a750d9ef87316449794964910cd74
     $miconexion->consulta($sql);
 }
 
