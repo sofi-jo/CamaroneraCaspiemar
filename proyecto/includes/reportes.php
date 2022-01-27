@@ -45,7 +45,7 @@
     @$fechaInicio = $_POST["fecha_inicio"];
     @$fechaFin = $_POST["fecha_fin"];
     @$filtrar = $_POST["select"];
-
+    $sql= "";
 
     if ($filtrar == "1") {
         echo "1";
@@ -62,11 +62,7 @@
         INNER JOIN costosindirectos c ON c.idcostosIndirectos  = rc.costosIndirectos_idcostosIndirectos
         WHERE rc.fecha BETWEEN '$fechaInicio' AND '$fechaFin';";
     }
-    /* $sql = "SELECT 
-    FROM registromateriaprima rm
-    INNER JOIN registromateriaprima_has_materiaprima r ON r.registroMateriaPrima_idregistroMateriaPrima = rm.idregistroMateriaPrima
-    INNER JOIN materiaprima m ON m.idmateriaprima  = r.materiaPrima_idmateriaPrima
-    WHERE ( rm.Fase_idFase % 2 ) = 0;"; */
+
     @$miconexion->consulta($sql);
     @$miconexion->verconsulta4();
     echo '<br>';
