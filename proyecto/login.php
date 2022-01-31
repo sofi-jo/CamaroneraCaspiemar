@@ -15,7 +15,7 @@
 
     $result= $query-> fetch(PDO::FETCH_ASSOC);
     if (!$result){
-        echo '<p class="error">La combinación del usuario y la contraseña son inválidos!</p>';
+        echo '<script>alert("La combinación del usuario y la contraseña son inválidos!");</script>';
     }else{
         if (password_verify($password, $result['password'])){
             $_SESSION['session_username']=$username;

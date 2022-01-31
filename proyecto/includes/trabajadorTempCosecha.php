@@ -12,7 +12,7 @@
     $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME); 
     echo "<h2 class='titulo'>Trabajadores Temporales</h2>";
     if ($fase == 1){
-        $sql =" SELECT ro.id_registro_mano_obre,t.cedula'Cedula', p.nombres'Nombres',p.apellidos'Apellidos',t.precio_hora'Precio por Hora',
+        $sql =" SELECT ro.id_registro_mano_obre,r.fecha'Fecha',t.cedula'Cedula', p.nombres'Nombres',p.apellidos'Apellidos',t.precio_hora'Precio por Hora',
         r.horas_trabajadas'Horas Trabajadas',r.pago'Total'
         FROM registro_mano_obra ro
         INNER JOIN registro_mano_obra_trabajador_temp r ON r.registro_mano_obra_id_registro_mano_obre = ro.id_registro_mano_obre
@@ -22,7 +22,7 @@
         $miconexion->consulta($sql);
         $miconexion->verconsulta3(); 
     }elseif($fase == 2){
-        $sql =" SELECT ro.id_registro_mano_obre,t.cedula'Cedula', p.nombres'Nombres',p.apellidos'Apellidos',t.precio_hora'Precio por Hora',
+        $sql =" SELECT ro.id_registro_mano_obre,r.fecha'Fecha',t.cedula'Cedula', p.nombres'Nombres',p.apellidos'Apellidos',t.precio_hora'Precio por Hora',
         r.horas_trabajadas'Horas Trabajadas',r.pago'Total'
         FROM registro_mano_obra ro
         INNER JOIN registro_mano_obra_trabajador_temp r ON r.registro_mano_obra_id_registro_mano_obre = ro.id_registro_mano_obre

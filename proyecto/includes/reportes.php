@@ -50,7 +50,7 @@
     if ($filtrar == "1") {
         echo "1";
     }elseif ($filtrar == "2") {
-        $sql = "SELECT m.nombre'Nombre', cantidad'Cantidad', costoUnitario'Costo Unitario',totatl'Total' 
+        $sql = "SELECT m.nombre'Nombre', cantidad'Cantidad', costoUnitario'Costo Unitario',total'Total' 
         FROM registromateriaprima_materiaprima as rm
         INNER JOIN materiaprima m ON m.idmateriaprima  = rm.materiaPrima_idmateriaPrima
         WHERE rm.fecha BETWEEN '$fechaInicio' AND '$fechaFin';";

@@ -29,7 +29,7 @@
 
     $miconexion->consulta($sql);
     $miconexion->verconsulta3(); 
-
+    
 
     echo '</main>';
     include("piePagina.php");

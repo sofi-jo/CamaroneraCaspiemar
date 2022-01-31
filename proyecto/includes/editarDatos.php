@@ -22,21 +22,21 @@
             $miconexion->consulta($sql);
 
             if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=1'){
-                echo "<script>location.href='materiaPrimaCosecha.php?fase=1&idcosecha=" . $idCosecha . "'</script>";
+                echo "<script>location.href='materiaPrimaCosecha.php?fase=1&idCosecha=" . $idCosecha . "'</script>";
             }else{
-                echo "<script>location.href='materiaPrimaCosecha.php?fase=2&idcosecha=" . $idCosecha . "'</script>";
+                echo "<script>location.href='materiaPrimaCosecha.php?fase=2&idCosecha=" . $idCosecha . "'</script>";
             }
         }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=1' or $urlFrom == '/CamaroneraCaspiemar/proyecto/includes/materiaPrimaCosecha.php?fase=2'){
             $sql="delete from registrocostosindirectos_costosindirectos where registroCostosIndirectos_idregistroCostosIndirectos=$idRegistro";
             $miconexion->consulta($sql);
-
             $sql="delete from registrocostosindirectos where idregistroCostosIndirectos=$idRegistro";
             $miconexion->consulta($sql);
 
             if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=1'){
-                echo "<script>location.href='registroCostoIndirecto.php?fase=1&idcosecha=" . $idCosecha . "'</script>";
+
+                echo "<script>location.href='registroCostoIndirecto.php?fase=1&idCosecha=" . $idCosecha . "'</script>";
             }else{
-                echo "<script>location.href='registroCostoIndirecto.php?fase=2&idcosecha=" . $idCosecha . "'</script>";
+                echo "<script>location.href='registroCostoIndirecto.php?fase=2&idCosecha=" . $idCosecha . "'</script>";
             }
     
         }elseif($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/arealaboral.php'){
@@ -63,7 +63,7 @@
             echo <<< EOT
             <main class="content">
             <h2 class="titulo">Formulario de actualización de productos</h2>
-            <form method="post" autocomplete="off">
+            <form class ="formulario" method="post" autocomplete="off">
             <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
             <input type="text" name="nombre" value = '$listaUser[1]'><br>
             <input type="text" name="descripcion" placeholder="Ingrese la descripcion del producto" value = '$listaUser[2]'><br>
@@ -92,7 +92,7 @@
             <main class="content">
             <h2 class="titulo">Fornmulario de actualización de productos de la Cosecha</h2>
             Producto: $listaComida[0]
-            <form method="post" autocomplete="off">
+            <form class ="formulario" method="post" autocomplete="off">
             <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
             Cantidad
             <input type="text" name="cantidad" placeholder="Ingrese la cantidad del producto" value = $listaUser[4]><br>
@@ -120,7 +120,7 @@
             echo <<< EOT
             <main class="content">
             <h2 class="titulo">Formulario de actualización de Costos Indirectos</h2>
-            <form method="post" autocomplete="off">
+            <form class ="formulario" method="post" autocomplete="off">
             <input type="hidden" name="idRegistro" value = '$listaUser[0]'><br>
             <input type="text" name="nombre" value = '$listaUser[1]'><br>
             <input type="text" name="tipoCostos" placeholder="Ingrese el tipo de producto" value = '$listaUser[2]'><br>
@@ -146,10 +146,9 @@
             echo <<< EOT
             <main class="content">
             <h2 class="titulo">Fornmulario de actualización de costos indirectos de la Cosecha</h2>
-            Producto: $listaCosto[0]
-            <form method="post" autocomplete="off">
-            <input type="hidden" name="idRegistro" value = $listaUser[0]><br>
-            Precio costo indirecto
+            <form class ="formulario" method="post" autocomplete="off">
+            <input type="hidden" name="idRegistro" value = $listaUser[0]><br>   
+            <p class="costo"><b>Producto:</b> $listaCosto[0]</p>
             <input type="text" name="costo" placeholder="Ingrese el precio" value = $listaUser[4]><br>
             <input type="submit" value="Actualizar">
             </form>
@@ -158,7 +157,6 @@
     
             if(array_key_exists('costo',$_POST)){
                 actualizarDatosCostosIndirectosCosecha();
-                
                 if($urlFrom == '/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=1'){
                     echo "<script>location.href='/CamaroneraCaspiemar/proyecto/includes/registroCostoIndirecto.php?fase=1&idCosecha=$idCosecha'</script>";
                 }else{

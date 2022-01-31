@@ -8,7 +8,7 @@
     echo <<< EOT
     <div class="dashboard">
     <script> prevUrl = document.referrer; </script>
-    <h2 class="titulo">Seleccion</h2>
+    <h2 class="titulo">Seleccion de Mano de Obra</h2>
     EOT;
 
     if ($fase == 1){

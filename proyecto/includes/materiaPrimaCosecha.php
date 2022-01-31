@@ -9,7 +9,6 @@ echo "<h2 class='titulo'>Materia Prima</h2>";
 echo '<label id="texto_nav1"></label>';
 
 
-
 echo '<div class="agregar"><a href=agregarDatos.php?urlFrom=' . $link . '>Agregar +</a></div>';
 
 $miconexion = new clase_mysqli7;
@@ -17,7 +16,7 @@ $miconexion->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
 
 if ($fase == 1) {
-
+    echo $idCosecha;
     $sql = "SELECT idRegistroMateriaPrima, m.nombre'Nombre', fecha'FECHA', cantidad'Cantidad', costoUnitario'Costo Unitario',
     total'Total' 
     FROM registromateriaprima rm
